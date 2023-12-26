@@ -1,0 +1,201 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color:#787055 ;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #333;
+}
+
+.navbar a {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.content-box {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 60px);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.content-button {
+  padding: 20px 30px;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  background-color: #333;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.content-button:hover {
+  background-color: #333;
+}
+
+/* #map-container {
+  display: flex;
+  padding-bottom:10px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top: 50px;
+  border-radius: 10px;
+  background-color: #eee;
+  border: 1px solid black;
+  width: 60%;
+  margin-left:250px;
+  margin-top:100px;
+  height: 450px;
+} */
+
+#map-container {
+  position: relative;
+  display: none;
+  position: fixed;  
+  top: 50%;  
+  left: 50%;  
+  transform: translate(-38%, -45%);  
+  z-index: 10; 
+  width: 60%;  
+  height: 60%; 
+  border: 0;
+  border-radius: 7px;
+  padding: 10px;
+  background-color: #eee;
+}
+
+#mapCloseButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+#map, #location-info {
+  box-sizing: border-box;
+}
+#map {
+  width: 50%;
+  height: 100%;
+  border-radius: 7px;
+}
+
+#location-info {
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background: #eee;
+}
+
+#location-name {
+  margin: 0;
+}
+.customButton {
+  font-size: 18px; /* Makes the button large */
+  color: #ffffff; /* White text color */
+  background-color: #007bff; /* Bootstrap primary button color */
+  border: none; /* Removes the default button border */
+  padding: 10px 20px; /* Adds some padding */
+  text-align: center; /* Center the text */
+  text-decoration: none;
+  margin-left: 100px;
+  margin-top: px;
+  display: inline-block;
+  transition-duration: 0.4s; /* Adds a transition effect */
+  cursor: pointer; /* Changes the cursor when hovering */
+  width: 200px; /* Sets a specific width */
+}
+
+.customButton:hover {
+  background-color: #0069d9; /* Darkens the button when hovering */
+  color: white;
+}
+
+.nav {
+  justify-content: center;
+}
+
+.nav-tabs {
+  margin-bottom:50px;
+}
+
+#mapCloseButton {
+  position: absolute;
+  top: 9px;
+  right: 13px;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  box-shadow: none;  /* This line removes any shadows */
+}
+
+#mapCloseButton .fas {
+  font-size: 15px;
+  color: red;
+}
+
+#mapCloseButton:hover .fas {
+  color: darkred;
+}
+
+#mapCloseButton:active, #mapCloseButton:focus {
+  box-shadow: none;  
+}
+
+.btn-primary {
+
+background-color:#9fd3c7;
+box-shadow: red;
+outline:none;
+border-color: aquamarine;
+border-radius: 30px;
+
+}
+
+.conto {
+
+  margin-top:206px;
+  padding-left: 70px;
+  
+}
+
+
+
+
+.custom-button-size {
+  width: 70% !important; 
+  height: 40px !important; 
+  font-size: 14px !important; 
+  padding: 10px !important;
+  left: -100px !important; 
+}
+
+.small-font {
+
+  font-size:13px;
+
+}
+
+#small-btn {
+
+  width:40% !important;
+  margin-left: 35px !important;
+  
+}
+
+
+
+

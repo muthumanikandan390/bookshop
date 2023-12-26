@@ -1,11 +1,1094 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cos</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;1,600&family=Lato:ital,wght@1,400;1,700&family=Rubik:wght@300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;1,600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;1,600&family=Rubik:wght@300&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;1,600&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+
+    {% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'assets/vendor/libs/report-gen/civil.css' %}"/>
+    {% endblock %}
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkRqO0KsS8Y36e81KV0EZJYCPLpqEsvWA&libraries=geometry"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    
+    <style>
+.content-placeholder {
+  background-image: url('{% static "assets/vendor/libs/report-gen/top.jpeg" %}');
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat; 
+  height: 600px;
+  display: flex;
+  align-items: center; 
+  background-color: transparent;
+  background-attachment: fixed;
+  justify-content: center; 
+}
+    </style>
 </head>
 <body>
-    <h1>hi</h1>
+ 
+
+<header class="header header-sticky">
+    <a href="#">
+        <img class="logo cos-logo" alt="Coslogo" src="{% static 'assets/vendor/libs/report-gen/bookify2.png' %}" />
+      
+        <span class="logo-text">cosAi</span>
+    </a>
+    <nav class="main-nav">
+        <ul class="main-nav-list">
+            <li><a class="main-nav-link" href="#">Home</a></li>
+            <li><a class="main-nav-link" href="#">About</a></li>
+            <li><a class="main-nav-link" href="#">Download</a></li>
+            <li><a class="main-nav-link" href="#">Contact</a></li>
+            <li><a class="main-nav-link nav-cta" href="#">Register</a></li>
+            <li><a class="main-nav-link nav-cta" href="#">Login</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="text-center slider-text">
+    <h1 id="blinking-text" >Need a Quick Building Plan Compliance Check ?</h1>
+</div>
+
+<main class="content-placeholder">
+    
+    <div class="button-container style="position: relative;">
+        <button class=" main-button center-button" id="showMapButton">Select Local Body</button>
+        <button class=" main-button center-button">Select Building Type</button>
+        <button class="main-button center-button">Select Building Sub Type</button>
+        <button class="main-button center-button">View Rule</button>
+        <div id = "big-container">
+
+            <!-- close button -->
+            <button id="mapCloseButton" class="btn btn-primary">
+                <i class="fas fa-times"></i>
+            </button>
+
+          <div id="map-container">
+            
+          </div>
+          <div id="info-container"> 
+            <nav>
+              <div class=" pincode-tabs nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Map</button>
+                <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Pincode</button>
+                <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">ULB name</button>
+              </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="pincode-container-map">
+                    <h5>Point Map reference:</h5>
+                    <h5>Address (nearest)</h5>
+                    <h5>Pincode</h5>
+                    <div><h2>local body</h2></div>
+                </div>
+                
+                <div class="dropdown-container">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="ruleSearchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Rule Search Parameter
+                        </button>
+                        
+                        <div class="dropdown-menu sub-dropdown-box" aria-labelledby="ruleSearchDropdown">
+                            
+                            <!-- First dropdown -->
+                            <select class="form-control option123 prevent-close building-dropdown   " id="ruleSearchSelect1">
+                                <option  value="Option 1">Select Building Type</option>
+                                
+                    
+                            </select>
+                            
+                            <!-- Second dropdown -->
+                            <select class="form-control option1234 prevent-close mt-2 building-dropdown  " id="ruleSearchSelect2">
+                                <option  value="Option 1">Select Building Sub Type</option>
+                            </select>
+                            
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="pincode-container">
+                    <label class = pincode-label for="pincode"> Pincode : </label>
+                    <input type="text" class = "pincode-placeholder "id="pincode" placeholder="        Enter Pincode">
+                    <button class = "pincode-submit" id="submitPincode">OK</button>
+                </div>
+
+
+
+                <!-- reusable component Rulesearchparameter -->
+
+
+
+                <!-- Inside Rulesearchparameter -->
+
+<div class="dropdown-container">
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="ruleSearchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Rule Search Parameter
+        </button>
+        
+        <div class="dropdown-menu sub-dropdown-box" aria-labelledby="ruleSearchDropdown">
+            
+            <!-- First dropdown -->
+            <select class="form-control option123 prevent-close building-dropdown " id="ruleSearchSelect1">
+                <option  value="Option 1">Select Building Type</option>
+                
+            </select>
+            
+            <!-- Second dropdown -->
+            <select class="form-control option1234 prevent-close mt-2 building-dropdown " id="ruleSearchSelect2">
+                <option  value="Option 1">Select Building Type</option>
+                
+            </select>
+            
+        </div>
+    </div>
+</div>
+
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+                <div class="pincode-container-ulb">
+                    <!-- First dropdown for selecting country -->
+                    <label  class = "country"for="selectCountry">Select Country:</label>
+                    <select class="form-control country2" id="selectCountry">
+                        <option  value="Option 1">Select Building Type</option>
+                        <option value="Country2">Country2</option>
+                        <!-- Add more options as needed -->
+                    </select>
+            
+                    <!-- Second dropdown for selecting state -->
+                    <label class = "country"for="selectState" class="mt-2">Please Select State:</label>
+                    <select class="form-control country2" id="selectState">
+                        <option value="State1">State1</option>
+                        <option value="State2">State2</option>
+                        <!-- Add more options as needed -->
+                    </select>
+            
+                    <!-- Third dropdown for selecting city -->
+                    <label class = "country" for="selectCity" class="mt-2">Please Select City:</label>
+                    <select class="form-control country2" id="selectCity">
+                        <option value="City1">City1</option>
+                        <option value="City2">City2</option>
+                        <!-- Add more options as needed -->
+                    </select>
+            
+                    <!-- Fourth dropdown for selecting local body -->
+                    <label class = "country"for="selectLocalBody" class="mt-2">Please Select Local Body:</label>
+                    <select class="form-control country2" id="selectLocalBody">
+                        <option value="LocalBody1">LocalBody1</option>
+                        <option value="LocalBody2">LocalBody2</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <div class="dropdown-container2">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="ruleSearchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Rule Search Parameter
+                        </button>
+                        
+                        <div class="dropdown-menu sub-dropdown-box3" aria-labelledby="ruleSearchDropdown">
+                            
+                            <!-- First dropdown -->
+                            <select class="form-control option1236 prevent-close building-dropdown" id="ruleSearchSelect1">
+                                <option  value="Option 1">Select Building Type</option>
+                                
+                            </select>
+                            
+                            <!-- Second dropdown -->
+                            <select class="form-control option1234 prevent-close mt-2 building-dropdown" id="ruleSearchSelect2">
+                                <option  value="Option 1">Select Building Type</option>
+                            </select>
+                            
+                        </div>
+                    </div>
+                    </div>
+            
+                
+            </div>
+            <!-- ulb end of dropdowns -->
+
+            <!-- end of rulesearchparamter -->
+        </div>
+        <div class="tab-content" id="nav-tabContent">
+            <!-- ... (your existing code inside tab-content) ... -->
+        
+        
+        </div>
+    </div>
+            </div>
+        </div>
+        <div class="action-buttons">
+            <button class="btn btn-primary mr-2 second-button">Plan Draft</button>
+            <button class="btn btn-primary mr-2 second-button">Plan Check</button>
+            <button class="btn btn-primary mr-2 second-button">Plan Assist</button>
+        </div>
+
+        </div>
+    
+        
+        
+    </div>
+
+</main>
+
+
+<!-- Quick Services Section -->
+<section class="quick-services container-2">
+    <div class="container">
+        <div class="row">
+            
+            <!-- Grid 1 -->
+            <div class="col-md-4">
+                <div class="service-box grid-box">
+                    <div class="service-img-container">
+                        <img class="service-img grid-icon" src="{% static 'assets/vendor/libs/report-gen/autocad2.png' %}" >
+                    </div>
+                    <p class="service-description">Plan Draft enable user in creating submission building plan.</p>
+                    <a href="#" id ="read-more" class="service-link ">Read more</a>
+                </div>
+            </div>
+            
+            <!-- Grid 2 -->
+            <div class="col-md-4">
+                <div class="service-box">
+                    <div class="service-img-container">
+                        <img class="service-img" src="{% static 'assets/vendor/libs/report-gen/plan.png' %}" >
+                    </div>
+                    <p class="service-description">Plan Check helps in creating building bye laws complaint submission drawing.</p>
+                    <a href="#" id ="read-more" class="service-link">Read more</a>
+                </div>
+            </div>
+            
+            <!-- Grid 3 -->
+            <div class="col-md-4">
+                <div class="service-box">
+                    <div class="service-img-container">
+                        <img class="service-img" src="{% static 'assets/vendor/libs/report-gen/compass.png' %}" >
+                    </div>
+                    <p class="service-description">‘Plan Assist’ is unique AI powered platform assisting in creation of accurate and compliant building plans.</p>
+                    <a href="#" id ="read-more"class="service-link">Read more</a>
+                </div>
+            </div>
+
+            <!-- Grid 4 -->
+            <div class="col-md-4">
+                <div class="service-box">
+                    <div class="service-img-container">
+                        <img class="service-img" src="{% static 'assets/vendor/libs/report-gen/search1.png' %}" >
+                    </div>
+                    <p class="service-description">Get to know development control rules and regulation based on selected location and building / project parameters.</p>
+                    <a href="#" id ="read-more" class="service-link">Read more</a>
+                </div>
+            </div>
+
+            <!-- Grid 5 -->
+            <div class="col-md-4">
+                <div class="service-box">
+                    <div class="service-img-container">
+                        <img class="service-img" src="{% static 'assets/vendor/libs/report-gen/approval.png' %}" >
+                    </div>
+                    <p class="service-description">Complete information guide for building plan approval process to obtain construction permit certificates, NOC’s required..</p>
+                    <a href="#" id ="read-more"class="service-link">Read more</a>
+                </div>
+            </div>
+
+            <!-- Grid 6 -->
+            <div class="col-md-4 scale">
+                <div class="service-box">
+                    <div class="service-img-container">
+                        <img class="service-img" src="{% static 'assets/vendor/libs/report-gen/visual.png' %}" >
+                    </div>
+                    <p class="service-description">Quick rule based building plan verification based on the selected project parameters.</p>
+                    <a href="#" id ="read-more"class="service-link">Read more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- download section -->
+<div class="container-fulid download-wrapper container-3">
+    <div class="row download-manual">
+        <div class="col-md-1 col-lg-1"></div>
+        <div class="col-md-10 col-lg-10 text-center">
+            <h3 class="mb-5 new">Download Manual</h3>
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <span class="btn-manual">
+                        <a onclick="OpenPlanDraftManual()" style="cursor:pointer;"><img src="{% static 'assets/vendor/libs/report-gen/icon1.png' %}" ><b class = "icon-words">Plan Draft</b></a>
+                    </span>
+                </div>
+                <div class="col-lg-4 col-md-4" style="    border-left: solid 1px gray;">
+                    <span class="btn-manual">
+                        <a onclick="OpenPlanCheckManual()" style="cursor:pointer;"><img src="{% static 'assets/vendor/libs/report-gen/icon1.png' %}" ><b class = "icon-words">Plan Check</b></a>
+                    </span>
+                </div>
+                <div class="col-lg-4 col-md-4" style="    border-left: solid 1px gray;">
+                    <span class="btn-manual">
+                        <a onclick="OpenPlanAssistManual()" style="cursor:pointer;"><img src="{% static 'assets/vendor/libs/report-gen/icon1.png' %}" ><b class = "icon-words">Plan Assist</b></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1 col-lg-1"></div>
+    </div>
+</div>
+<!-- end of download section -->
+
+<!-- start naturos video container  -->
+<section class="section-stories">
+    <div class="bg-video">
+        <video class="bg-video__content" autoplay="" muted="" loop="">
+            <source src="{% static 'assets/vendor/libs/report-gen/building.mp4' %}" type="video/mp4">
+            <source src="img/video.webm" type="video/webm">
+            Your browser is not supported!
+        </video>
+    </div>
+
+    <div class="u-center-text u-margin-bottom-big">
+        <div class="video-text-container">
+            <h2 class="heading-secondary">
+                What is <span style="color:#e67e22;">Cos</span><span style="color:black;">Ai</span> ?
+            </h2>
+            <h2 class="description-text">
+                Creating building plans and designs, while taking into consideration latest development control (DC) rules with periodic amendments is a daunting task taking away your crucial intellectual time. Adding to the stress are tight deadlines and your client expectations of avoiding recycle of plan approval process.
+            </h2>
+        </div>
+    </div>
+    
+
+  
+</section>
+<!-- end naturos video container  -->
+
+<!-- register now section -->
+<div class="row project text-center">
+    <div class="col-md-12 col-lg-12 text-center">
+        <h2 class="projet-heading">To Unleash the True ARCHITECT in you!!</h2>
+        <div class="container pro-desc">
+            <h4>CosAi saves the crucial time spent by you in rework, giving you ample time
+                for creative energies in designing better buildings, thereby gaining on revenue
+                and customer satisfaction.</h4>
+        </div>
+    
+        <input name="Button4" type="button" id="Button4" value="Register Now" class="btn-register project-btn mt-5" data-toggle="modal" data-target="#register">
+    </div>
+    <div style="padding:1%;"></div>
+</div>
+
+<!-- end of register now section -->
+<!-- start of link section -->
+
+<div class="row footer link-container" id="contactus">
+    <div class="col-md-4 col-sm-4 col-lg-4 first-link-box">
+        <h2 class = "contact">Contact </h2>
+        <p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;<b class ="office">Office Address</b></p>
+        <p class="office-desc">COS AI,
+            No.6/13, Ground Floor,
+            Kamaraj Nagar 4th Street,
+            Tallakulam, Madurai-625002
+            Phone: 0452-3500776</p>
+        <div style="padding: 2%;"></div>
+        <p class ="office-mail"><i class="fa fa-envelope office-mail" aria-hidden="true"></i>coscmd@gmail.com</p>
+        <p class ="office-mail"><i class="fa fa-phone" aria-hidden="true"></i>+91-94430 63037</p>
+        <h2>Follow us</h2>
+        <ul class="social">
+            <li><a href="javascript:void(0);" onclick="OpenFacebook();"><img src="{% static 'assets/vendor/libs/report-gen/facebook.png' %}"></a></li>&nbsp;&nbsp;
+            <li><a href="javascript:void(0);" onclick="OpenInstagram();"><img src="{% static 'assets/vendor/libs/report-gen/instagram.png' %}"></a></li>&nbsp;&nbsp;
+            <li><a href="javascript:void(0);" onclick="OpenLinkedIn();"><img src="{% static 'assets/vendor/libs/report-gen/linkedin.png' %}"></a></li>&nbsp;&nbsp;
+            <li><a href="javascript:void(0);" onclick="OpenTwitter();"><img src="{% static 'assets/vendor/libs/report-gen/youtube.png' %}"></a></li>&nbsp;&nbsp;
+            <li><a href="javascript:void(0);" onclick="OpenYouTube();"><img src="{% static 'assets/vendor/libs/report-gen/twitter.png' %}"></a></li>
+        </ul>
+        
+
+
+    </div>
+   
+    <div class="col-md-3 col-sm-2 col-lg-3 first-link-box">
+        <h2>Our Products</h2>
+        <ul>
+            <li class = "product-list"><a href="javascript:void(0);">ATMS</a></li>
+            <li class = "product-list"><a href="javascript:void(0);" >ATCC</a></li>
+            <li class = "product-list"><a href="javascript:void(0);">ANPR</a></li>
+             <li class = "product-list"><a href="javascript:void(0);">TMCS</a></li>
+        </ul>
+
+    </div>
+    
+    <div class="col-md-3 col-sm-2 col-lg-2 first-link-box">
+        <h2>Download Mobile App</h2>
+        <p class = "qr">Scan below QR code</p>
+        <img class="scan-img qr-img" src="{% static 'assets/vendor/libs/report-gen/scan.png' %}">
+        <p><img class="app-img app-img" src="{% static 'assets/vendor/libs/report-gen/app1.png' %}"></p>
+    </div>
+</div>
+
+
+<!-- end of link section -->
+
+
+
+<!-- footer section -->
+<div  class="row text-center footer-bottom ">
+    <div class="col-md-12 col-lg-12 text-center p-0">
+        <p id = "footer-margin" class="px-4">
+            <a href="https://www.cosai.in/" >© CosAi.in</a> , Madurai | All Rights Reserved | CosAi is registered trademarks to Cos Consultancy Limited, Madurai.
+        </p>
+    </div>
+      
+    <!-- <script>
+    
+    document.addEventListener('DOMContentLoaded', function() { 
+    
+        document.getElementById('showMapButton').addEventListener('click', function() {
+            document.getElementById('big-container').style.display = 'flex';
+            document.getElementById('big-container').style.backgroundColor = '#faf9f9'; // Set background to white when button is clicked
+            document.getElementById('info-container').style.display = 'block';
+            initMap();
+        });
+    
+        function initMap() {
+            var centerLatLng = { lat: 9.9252, lng: 78.1198 };
+    
+            var map = new google.maps.Map(document.getElementById('map-container'), {
+                zoom: 10,
+                center: centerLatLng
+            });
+            new google.maps.Marker({
+                position : centerLatLng,map,
+                map,
+                title:"hello world"
+            });
+            const radiusInDegrees = 0.1;  // Change this to adjust the size of the circle.
+            const numberOfMarkers = 12;   // Change this to adjust the number of markers
+            const circlePath = [];
+    for (let i = 0; i < numberOfMarkers; i++) {
+        const angle = (i / numberOfMarkers) * 2 * Math.PI;  // Distributing markers equally in 360 degrees
+        const lat = centerLatLng.lat + radiusInDegrees * Math.cos(angle);
+        const lng = centerLatLng.lng + radiusInDegrees * Math.sin(angle);
+        const position = { lat, lng };
+        circlePath.push(position);
+        new google.maps.Marker({
+            position: { lat, lng },
+            map: map
+        });
+    }
+
+    const circlePolygon = new google.maps.Polygon({
+        paths: circlePath,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: 'purple',  
+        fillOpacity: 0.35,
+        map: map
+    });
+        } 
+        
+        
+        
+       
+    
+        document.getElementById('showMapButton').addEventListener('click', function() {
+            var bigContainer = document.getElementById('big-container');
+            if (bigContainer.style.top !== "-50px") {
+                bigContainer.style.top = "-248px";
+            }
+        });
+    
+        var preventCloseItems = document.querySelectorAll('.prevent-close');
+        preventCloseItems.forEach(function(item) {
+            item.addEventListener('click', function(event) {
+                event.stopPropagation(); 
+            });
+        });
+    
+        var navbar = document.querySelector('.header');
+    
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) { 
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    
+    });
+    
+    </script> -->
+    
+
+
+
+    <!-- place multiple marker -->
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() { 
+            // Map initialization function
+            function initMap() {
+                var myLatLng = { lat: 9.9252, lng: 78.1198 };
+        
+                var map = new google.maps.Map(document.getElementById('map-container'), {
+                    zoom: 10,
+                    center: myLatLng
+                });
+        
+                // Event listener to add marker on map click
+                map.addListener('click', function(e) {
+                    placeMarkerAndPanTo(e.latLng, map);
+                });
+            }
+        
+            // Helper function to place a marker and pan to its location
+            function placeMarkerAndPanTo(latLng, map) {
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map
+                });
+        
+                // Add click event to the marker
+                marker.addListener('click', function() {
+                    alert('Latitude: ' + latLng.lat() + ', Longitude: ' + latLng.lng());
+                });
+        
+                map.panTo(latLng);
+            }
+        
+            document.getElementById('showMapButton').addEventListener('click', function() {
+                document.getElementById('big-container').style.display = 'flex';
+                document.getElementById('big-container').style.backgroundColor = '#faf9f9'; 
+                document.getElementById('info-container').style.display = 'block';
+                initMap();
+            });
+        
+            document.getElementById('showMapButton').addEventListener('click', function() {
+                var bigContainer = document.getElementById('big-container');
+                if (bigContainer.style.top !== "-50px") {
+                    bigContainer.style.top = "-248px";
+                }
+            });
+        
+            var preventCloseItems = document.querySelectorAll('.prevent-close');
+            preventCloseItems.forEach(function(item) {
+                item.addEventListener('click', function(event) {
+                    event.stopPropagation(); 
+                });
+            });
+        
+            var navbar = document.querySelector('.header');
+        
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) { 
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+        </script> -->
+
+
+        <!-- working condition -->
+        
+        
+        <!-- <script>
+   document.addEventListener('DOMContentLoaded', function() {
+    
+
+    function initMap() {
+        var myLatLng = { lat: 9.9252, lng: 78.1198 };
+
+        var map = new google.maps.Map(document.getElementById('map-container'), {
+            zoom: 10,
+            center: myLatLng
+        });
+
+        var polygons = [];
+
+        
+
+        
+        
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(function(region) {
+                var polygon = new google.maps.Polygon({
+                    paths: region.coordinates,
+                    strokeColor: '#000000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 5,
+                    fillColor: '#e3e3e3',
+                    fillOpacity: 0.35,
+                    map: map,
+                    visible: false
+                });
+
+                polygons.push(polygon);
+
+                
+                google.maps.event.addListener(polygon, 'click', function(event) {
+                alert("Clicked region: " + region.name);
+    
+            });
+                console.log(region.coordinates)
+       
+            });
+
+            map.addListener('click', function(event) {
+                polygons.forEach(function(polygon) {
+                    if (google.maps.geometry.poly.containsLocation(event.latLng, polygon)) {
+                        polygon.setVisible(true);
+                    }
+                });
+            });
+        });
+   
+        
+   
+    }
+
+    document.getElementById('showMapButton').addEventListener('click', function() {
+        document.getElementById('big-container').style.display = 'flex';
+        document.getElementById('big-container').style.backgroundColor = '#faf9f9';
+        document.getElementById('info-container').style.display = 'block';
+        initMap();
+    });
+
+    document.getElementById('showMapButton').addEventListener('click', function() {
+        var bigContainer = document.getElementById('big-container');
+        if (bigContainer.style.top !== "-50px") {
+            bigContainer.style.top = "-248px";
+        }
+    });
+
+    var preventCloseItems = document.querySelectorAll('.prevent-close');
+    preventCloseItems.forEach(function(item) {
+        item.addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+    });
+
+    var navbar = document.querySelector('.header');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+});
+
+
+</script> -->
+
+
+
+        
+<!-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    
+        function initMap() {
+            var myLatLng = { lat: 9.9252, lng: 78.1198 };
+    
+            var map = new google.maps.Map(document.getElementById('map-container'), {
+                zoom: 10,
+                center: myLatLng
+            });
+    
+            var polygons = [];
+    
+                .then(response => response.json())
+                .then(data => {
+                    const regions = JSON.parse(data.regions);
+                    const sites = JSON.parse(data.sites);
+    
+                    regions.forEach(function(region) {
+                        
+                        const regionCoordinates = region.fields.coordinates.split('/').filter(coordinate => coordinate && coordinate.includes(",")).map(coordinate => {
+                            const [latStr, lngStr] = coordinate.split(",");
+                            const lat = parseFloat(latStr.trim());
+                            const lng = parseFloat(lngStr.trim());
+    
+                            if (!isNaN(lat) && !isNaN(lng)) {
+                                return { lat, lng };
+                            }
+                        }).filter(Boolean);
+                        
+    
+                        var regionPolygon = new google.maps.Polygon({
+                            paths: regionCoordinates,
+                            strokeColor: '#000000',
+                            strokeOpacity: 0.8,
+                            strokeWeight: 5,
+                            fillColor: '#e3e3e3',
+                            fillOpacity: 0.35,
+                            map: map,
+                            visible: false
+                        });
+    
+                        polygons.push(regionPolygon);
+                        region.polygon = regionPolygon;
+                        
+    
+                        google.maps.event.addListener(regionPolygon, 'click', function(event) {
+                            alert("Clicked region: " + region.fields.name);
+    
+                            // Make the region polygon visible
+                            regionPolygon.setVisible(true);
+    
+                            // Make child sites of the clicked region visible
+                            const childSites = sites.filter(site => site.fields.parent_region === region.pk);
+                            childSites.forEach(function(site) {
+                                site.polygon.setVisible(true);
+                            });
+                        });
+    
+                        const childSites = sites.filter(site => site.fields.parent_region === region.pk);
+                        childSites.forEach(function(site) {
+                            const siteCoordinates = site.fields.coordinates.split(',').filter(coordinate => coordinate && coordinate.includes(" ")).map(coordinate => {
+                                const [latStr, lngStr] = coordinate.split(" ");
+                                const lat = parseFloat(latStr.trim());
+                                const lng = parseFloat(lngStr.trim());
+    
+                                if (!isNaN(lat) && !isNaN(lng)) {
+                                    return { lat, lng };
+                                }
+                            }).filter(Boolean);
+    
+                            var sitePolygon = new google.maps.Polygon({
+                                paths: siteCoordinates,
+                                strokeColor: '#FF0000',
+                                strokeOpacity: 0.8,
+                                strokeWeight: 3,
+                                fillColor: '#FFA07A',
+                                fillOpacity: 0.35,
+                                map: map,
+                                visible: false
+                            });
+    
+                            polygons.push(sitePolygon);
+                            site.polygon = sitePolygon;
+    
+                            google.maps.event.addListener(sitePolygon, 'click', function(event) {
+                                alert("Clicked site: " + site.fields.name);
+    
+                                // Make the site polygon visible
+                                sitePolygon.setVisible(true);
+                            });
+                        });
+                    });
+                });
+        }
+    
+        document.getElementById('showMapButton').addEventListener('click', function() {
+            document.getElementById('big-container').style.display = 'flex';
+            document.getElementById('big-container').style.backgroundColor = '#faf9f9';
+            document.getElementById('info-container').style.display = 'block';
+            initMap();
+        });
+    
+        document.getElementById('showMapButton').addEventListener('click', function() {
+            var bigContainer = document.getElementById('big-container');
+            if (bigContainer.style.top !== "-50px") {
+                bigContainer.style.top = "-248px";
+            }
+        });
+    
+        var preventCloseItems = document.querySelectorAll('.prevent-close');
+        preventCloseItems.forEach(function(item) {
+            item.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
+        });
+    
+        var navbar = document.querySelector('.header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    });
+    </script>    -->
+
+<!-- working script -->
+     <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        
+            function initMap() {
+                var myLatLng = { lat: 9.9252, lng: 78.1198 };
+        
+                var map = new google.maps.Map(document.getElementById('map-container'), {
+                    zoom: 10,
+                    center: myLatLng
+                });
+                      
+                var polygons = [];
+        
+              
+                .then(response => response.json())
+                .then(data => {
+                    const regions = JSON.parse(data.regions);
+                    const sites = JSON.parse(data.sites);
+        
+                    regions.forEach(function(region) {
+                        const regionCoordinates = region.fields.coordinates.split('/').filter(Boolean).map(coordinate => {
+            const [lat, lng] = coordinate.split(",").map(parseFloat);
+            return { lat, lng };
+        }).filter(coord => !isNaN(coord.lat) && coord.lng !== undefined);
+        
+        console.log(regionCoordinates )
+        
+                        var regionPolygon = new google.maps.Polygon({
+                            paths: regionCoordinates,
+                            strokeColor: '#000000',
+                            strokeOpacity: 0.8,
+                            strokeWeight: 5,
+                            fillColor: '#e3e3e3',
+                            fillOpacity: 0.35,
+                            map: map,
+                            visible: false
+                        });
+        
+                        polygons.push(regionPolygon);
+        
+                        google.maps.event.addListener(regionPolygon, 'click', function(event) {
+                            alert("Clicked region: " + region.fields.name);
+                        });
+        
+                        const childSites = sites.filter(site => site.fields.parent_region === region.pk);
+        
+                        childSites.forEach(function(site) {
+                            const siteCoordinates = site.fields.coordinates.split(',').map(coordinate => {
+                                const [lat, lng] = coordinate.split(" ").map(parseFloat);
+                                return { lat, lng };
+                            });
+        
+                            var sitePolygon = new google.maps.Polygon({
+                                paths: siteCoordinates,
+                                strokeColor: '#FF0000',
+                                strokeOpacity: 0.8,
+                                strokeWeight: 3,
+                                fillColor: '#FFA07A',
+                                fillOpacity: 0.35,
+                                map: map,
+                                visible: false
+                            });
+        
+                            polygons.push(sitePolygon);
+        
+                            google.maps.event.addListener(sitePolygon, 'click', function(event) {
+                                alert("Clicked site: " + site.fields.name);
+                            });
+                        });
+                    });
+        
+                    map.addListener('click', function(event) {
+                        polygons.forEach(function(polygon) {
+                            if (google.maps.geometry.poly.containsLocation(event.latLng, polygon)) {
+                                polygon.setVisible(true);
+                                let correspondingRegion = regions.find(region => polygon === region.polygon);
+        
+                                if(correspondingRegion) {
+                                    const childSites = sites.filter(site => site.fields.parent_region === correspondingRegion.pk);
+                                    childSites.forEach(function(site) {
+                            site.polygon.setVisible(true);  // Assuming you've linked the polygon object to the site data
+                        });
+                                }
+                            }
+                        });
+                    });  //end
+                });
+            }
+        
+            document.getElementById('showMapButton').addEventListener('click', function() {
+                document.getElementById('big-container').style.display = 'flex';
+                document.getElementById('big-container').style.backgroundColor = '#faf9f9';
+                document.getElementById('info-container').style.display = 'block';
+                initMap();
+            });
+        
+            document.getElementById('showMapButton').addEventListener('click', function() {
+                var bigContainer = document.getElementById('big-container');
+                if (bigContainer.style.top !== "-50px") {
+                    bigContainer.style.top = "-248px";
+                }
+            });
+        
+            var preventCloseItems = document.querySelectorAll('.prevent-close');
+            preventCloseItems.forEach(function(item) {
+                item.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                });
+            });
+        
+            var navbar = document.querySelector('.header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+        </script>   -->
+
+        <script>
+   document.addEventListener('DOMContentLoaded', function() {
+
+function initMap() {
+    var myLatLng = { lat: 9.9252, lng: 78.1198 };
+
+    var map = new google.maps.Map(document.getElementById('map-container'), {
+        zoom: 10,
+        center: myLatLng
+    });
+
+    var polygons = [];
+
+    
+    .then(response => response.json())
+    .then(data => {
+        data.regions.forEach(function(region) {
+            const regionCoordinates = region.coordinates.map(coordinate => {
+                return { lat: coordinate.lat, lng: coordinate.lng };
+            });
+
+            var regionPolygon = new google.maps.Polygon({
+                paths: regionCoordinates,
+                strokeColor: '#000000',
+                strokeOpacity: 0.8,
+                strokeWeight: 5,
+                fillColor: '#e3e3e3',
+                fillOpacity: 0.35,
+                map: map,
+                visible: false,
+                customId: region.pk  // Show by default
+            });
+
+            polygons.push(regionPolygon);
+
+            google.maps.event.addListener(regionPolygon, 'click', function(event) {
+                alert("Clicked region: " + region.name);
+            });
+
+            const childSites = data.sites.filter(site => site.parent_region === region.pk);
+
+            childSites.forEach(function(site) {
+                const siteCoordinates = site.coordinates.map(coordinate => {
+                    return { lat: coordinate.lat, lng: coordinate.lng };
+                });
+
+                var sitePolygon = new google.maps.Polygon({
+                    paths: siteCoordinates,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 3,
+                    fillColor: '#FFA07A',
+                    fillOpacity: 0.35,
+                    map: map,
+                    visible:false,
+                    parentRegionId: site.parent_region // Show by default
+                });
+
+                polygons.push(sitePolygon);
+
+                google.maps.event.addListener(sitePolygon, 'click', function(event) {
+                    alert("Clicked site: " + site.name);
+                });
+            });
+        });
+        map.addListener('click', function(event) {
+                polygons.forEach(function(polygon) {
+                    if (google.maps.geometry.poly.containsLocation(event.latLng, polygon) && !polygon.getVisible()) {
+                        polygon.setVisible(true);
+                        if (polygon.customId) {
+                            // If it's a region polygon
+                            // Find all child polygons and make them visible
+                            polygons.forEach(function(childPolygon) {
+                                if (childPolygon.parentRegionId === polygon.customId) {
+                                    childPolygon.setVisible(true);
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+  
+        map.addListener('click', function(event) {
+                        polygons.forEach(function(polygon) {
+                            if (google.maps.geometry.poly.containsLocation(event.latLng, polygon)) {
+                                polygon.setVisible(true);
+                                let correspondingRegion = regions.find(region => polygon === region.polygon);
+        
+                                if(correspondingRegion) {
+                                    const childSites = sites.filter(site => site.fields.parent_region === correspondingRegion.pk);
+                                    childSites.forEach(function(site) {
+                            site.polygon.setVisible(true);  // Assuming you've linked the polygon object to the site data
+                        });
+                                }
+                            }
+                        });
+                    });  //end
+                });
+            }
+        
+            document.getElementById('showMapButton').addEventListener('click', function() {
+                document.getElementById('big-container').style.display = 'flex';
+                document.getElementById('big-container').style.backgroundColor = '#faf9f9';
+                document.getElementById('info-container').style.display = 'block';
+                initMap();
+            });
+        
+            document.getElementById('showMapButton').addEventListener('click', function() {
+                var bigContainer = document.getElementById('big-container');
+                if (bigContainer.style.top !== "-50px") {
+                    bigContainer.style.top = "-248px";
+                }
+            });
+        
+            var preventCloseItems = document.querySelectorAll('.prevent-close');
+            preventCloseItems.forEach(function(item) {
+                item.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                });
+            });
+        
+            var navbar = document.querySelector('.header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+        </script>
 </body>
 </html>

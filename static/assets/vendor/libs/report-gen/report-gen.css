@@ -1,0 +1,271 @@
+
+
+
+  .main {
+    
+    width: 1225px;
+    height: 73px;
+    padding: 15px;
+    border-radius: 12px;
+
+  }
+
+  @media (max-width: 1200px) {
+    .main {
+      transform: scale(0.7);
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .main {
+      transform: scale(0.6);
+    }
+  }
+
+  @media (max-width: 800px) {
+    .main {
+      transform: scale(0.5);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .main {
+      transform: scale(0.4);
+    }
+  }
+
+  .form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
+
+
+  .button {
+
+    width: 180px;
+    height: 50px;
+    border-radius: 12px;
+    margin-top: 20px;
+    margin-left:850px;
+    /* margin-left:1000px; */
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1.15px;
+    background-color: #F2BE22;
+    color: #f9f9f9;
+    box-shadow: 8px 8px 16px #d1d9e6, -8px -8px 16px #f9f9f9;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .button:hover {
+    background-color: #e88f22;
+    box-shadow: 10px 10px 20px #d1d9e6, -10px -10px 20px #f9f9f9;
+    color: #2C3333;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  }
+
+  .newform-button {
+    width: 180px;
+    height: 50px;
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   column-gap: 10px;
+   padding:30px;
+  }
+
+  /* radio buttons */
+  .radio-container {
+    position: absolute;
+    transform:translate(-30%,-30%);
+    top:35%;
+    left:3%;
+    padding-left: 50px;
+  }
+
+  .radio-mini-div {
+    padding-top: 60px;
+    padding-left: 50px;
+    
+  }
+
+  /* input [type = "radio"] {
+    display: none;
+  } */
+
+  .radio-type {
+    display: none;
+  }
+
+  /* label {
+    color:#F2BE22;
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Arimo', sans-serif;
+    line-height: 0;
+  } */
+
+
+  label {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    padding-left: 30px;
+    color: #181818;
+    font-size: 25px;
+    font-weight: 1000;
+    font-family: 'Arimo', sans-serif;
+    cursor: pointer;
+  }
+
+  label:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #F2BE22;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+
+  input[type="radio"]:checked + label:before {
+    background-color: #F2BE22;
+  }
+
+  input[type="radio"]:checked + label:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #F2BE22;
+    border-radius: 50%;
+  }
+
+  input[type="radio"]:checked + label:before {
+    border: 2px solid #F2BE22;
+    box-shadow: 0 0 0 3px rgba(242, 190, 34, 0.5);
+  }
+
+  @keyframes is-gx {
+    0%, 10%, 100% {
+      width: 400px;
+    }
+    30%, 50% {
+      width: 500px;
+    }
+  }
+
+  .constainer {
+    margin-top: 500px;
+  }
+
+  .link {
+    display: block;
+    padding-top: 120px;
+    padding-left: 70px;
+  }
+
+  .center-table {
+   padding-left: 500px;
+    
+  }
+
+ 
+
+  #reportTitle {
+    position: relative;
+    margin-top: 10px;
+    margin-left:205px;
+    margin-bottom:29px;
+    
+    
+  }
+
+  /* #reports {
+    appearance: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #FFF;
+    color: #000;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  #reports:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 100%;
+    background: url("animeee.png") center center no-repeat;
+    background-size: 20px;
+    pointer-events: none;
+  }
+  
+  #reports:focus {
+    outline: none;
+  }
+  
+  #reports option {
+    background-color: #FFF;
+    color: #000;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+  }
+   */
+
+   #reports {
+    border: none;
+    border-radius: 5px;
+    background-color: #c7c3c3;
+    color: #333;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    padding: 4px;
+    cursor: pointer;
+    width: 85px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  #reports:focus {
+    outline: none;
+  }
+  
+  #reports::after {
+    content: '\25BC'; /* Unicode character for down arrow */
+    position: absolute;
+    top: 50%;
+    right: 210px;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+  }
+  
+  #reports option {
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+  }
+  .dropdown-container {
+    position: absolute;
+    top: 97.5px; /* Adjust the top position as desired */
+    left: 1192px; /* Adjust the left position as desired */
+  }
