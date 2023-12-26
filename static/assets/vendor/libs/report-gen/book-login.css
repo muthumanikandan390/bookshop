@@ -1,0 +1,1404 @@
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    
+    
+  }
+  
+  html {
+    font-size: 62.5%;
+  }
+  
+  body {
+    font-family: "Rubik", sans-serif;
+    line-height: 1;
+    font-weight: 400;
+    color: #555;
+    padding-top: 96.03px;
+   
+  }
+  
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* To make sure the navbar stays on top of all other content */
+    transition: box-shadow 0.3s ease; /* Smooth transition for the shadow */
+  }
+  .scrolled {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* GENRAL REUSABLE COMPONENTS */
+  
+  
+  .container {
+   
+    max-width: 120rem;
+    padding: 0 3.2rem;
+    margin: 0 auto;
+  }
+  
+  .grid {
+    display: grid;
+    column-gap: 6.4rem;
+    row-gap: 9.6rem;
+  
+    /* margin-bottom: 9.6rem; */
+  }
+  
+  /* .grid:last-child {
+    margin-bottom: 0;
+  } */
+  
+  .grid:not(:last-child) {
+    margin-bottom: 9.6rem;
+  }
+  
+  .grid--2-cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid--3-cols {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid--4-cols {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .grid--5-cols {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  
+  .grid--center-v {
+    align-items: center;
+  }
+  
+  .heading-primary,
+  .heading-secondary,
+  .heading-tertiary {
+    font-weight: 700;
+    color: #333;
+    /* color: #45260a; */
+    /* color: #343a40; */
+    letter-spacing: -0.5px;
+  }
+  
+  .heading-primary {
+    font-size: 5.2rem;
+    line-height: 1.05;
+    margin-bottom: 3.2rem;
+  }
+  
+  .heading-secondary {
+    font-size: 4.4rem;
+    line-height: 1.2;
+    margin-bottom: 9.6rem;
+  }
+  
+  .heading-tertiary {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 3.2rem;
+  }
+  
+  .subheading {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #cf711f;
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+    letter-spacing: 0.75px;
+    
+  }
+  
+  .btn,
+  .btn:link,
+  .btn:visited {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 1.6rem 3.2rem;
+    border-radius: 9px;
+    /* Only necessary for .btn */
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    /* Put transition on original "state" */
+    /* transition: background-color 0.3s; */
+    transition: all 0.3s;
+    
+  
+  }
+  
+  .btn--full:link,
+  .btn--full:visited {
+    background-color: #e67e22;
+    color: #fff;
+    
+  }
+  
+  .btn--full:hover,
+  .btn--full:active {
+    background-color: #cf711f;
+    
+  }
+  
+  .btn--outline:link,
+  .btn--outline:visited {
+    background-color: #fff;
+    color: #555;
+    
+  }
+  
+  .btn--outline:hover,
+  .btn--outline:active {
+    background-color: #fdf2e9;
+  
+    /* border: 3px solid #fff; */
+  
+    /* Trick to add border inside */
+    box-shadow: inset 0 0 0 3px #fff;
+  }
+  
+  .btn--form {
+    background-color: #45260a;
+    color: #fdf2e9;
+    align-self: end;
+    padding: 1.2rem;
+  }
+  
+  .btn--form:hover {
+    background-color: #fff;
+    color: #555;
+  }
+  
+  .link:link,
+  .link:visited {
+    display: inline-block;
+    color: #e67e22;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+    transition: all 0.3s;
+  }
+  
+  .link:hover,
+  .link:active {
+    color: #cf711f;
+    border-bottom: 1px solid transparent;
+  }
+  
+  .list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+  
+  .list-item {
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+  }
+  
+  .list-icon {
+    width: 3rem;
+    height: 3rem;
+    color: #e67e22;
+  }
+  
+  *:focus {
+    outline: none;
+    /* outline: 4px dotted #e67e22; */
+    /* outline-offset: 8px; */
+    
+  }
+  
+  /* HELPER/SETTINGS CLASSES */
+  .margin-right-sm {
+    margin-right: 1.6rem !important;
+  }
+  
+  .margin-bottom-md {
+    margin-bottom: 4.8rem !important;
+  }
+  
+  .center-text {
+    text-align: center;
+  }
+  
+  strong {
+    font-weight: 500;
+  }
+  
+  /**************************/
+  /* HEADER */
+  /**************************/
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fdf2e9;
+  
+    /* Because we want header to be sticky later */
+    height: 9.6rem;
+    padding: 0 4.8rem;
+  }
+  
+  .logo {
+    height: 2.2rem;
+  }
+  
+  
+  /* NAVIGATION */
+  
+  
+  .main-nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 3.2rem;
+  }
+  
+  .main-nav-link:link,
+  .main-nav-link:visited {
+    display: inline-block;
+    text-decoration: none;
+    color: #606470;
+    font-weight: 400;
+    font-size: 1.9rem;
+    transition: all 0.3s;
+  }
+  
+  .main-nav-link:hover,
+  .main-nav-link:active {
+    color: #cf711f;
+  }
+  
+  .main-nav-link.nav-cta:link,
+  .main-nav-link.nav-cta:visited {
+    padding: 1.2rem 2.4rem;
+    border-radius: 9px;
+    color: #fff;
+    background-color: #e67e22;
+  }
+  
+  .main-nav-link.nav-cta:hover,
+  .main-nav-link.nav-cta:active {
+    background-color: #cf711f;
+  }
+  
+  
+  /* HERO SECTION */
+  
+  
+  .section-hero {
+    background-color: #fdf2e9;
+    padding: 4.8rem 0 9.6rem 0;
+  }
+  
+  .hero {
+    max-width: 130rem;
+    margin: 0 auto;
+    padding: 0 3.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9.6rem;
+    align-items: center;
+  }
+  
+  .hero-description {
+    font-size: 2rem;
+    line-height: 1.6;
+    margin-bottom: 4.8rem;
+  }
+  
+  .hero-img {
+    width: 100%;
+  }
+  
+  .delivered-meals {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    margin-top: 8rem;
+  }
+  
+  .delivered-imgs {
+    display: flex;
+  }
+  
+  .delivered-imgs img {
+    height: 4.8rem;
+    width: 4.8rem;
+    border-radius: 50%;
+    margin-right: -1.6rem;
+    border: 3px solid #fdf2e9;
+  }
+  
+  .delivered-imgs img:last-child {
+    margin: 0;
+  }
+  
+  .delivered-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+  
+  .delivered-text span {
+    color: #cf711f;
+    font-weight: 700;
+  }
+  
+  
+  
+  
+  /* 
+  .content-placeholder {
+   
+    height: 600px; 
+  
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+  }  */
+  
+  
+  
+  .button-container {
+    display: flex;
+    gap: 50px;
+  }
+  
+  .center-button {
+    padding: 1.5rem 5rem;
+    border: none;
+    background-color: #e67e22;
+    color: #233142;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .center-button:hover {
+    background-color: #cf711f;
+  }
+  
+  .content-placeholder .center-button {
+    border-radius: 20px;
+    
+  }
+  
+  
+  
+  .button-container {
+    position: relative;
+    z-index: 200; 
+  }
+  
+  #big-container {
+    display: none;
+    height: 570px;
+    width: 950px;
+    right:150px;
+    position: absolute;
+    /* top mattum js la adjust  */
+    top: 50px;
+    z-index: 100;
+    display: flex; 
+    flex-direction: row; 
+    padding: 45px 17px 17px 17px; /* top right bottom left */
+    background-color: transparent; 
+    border-radius: 12px;
+  }
+  
+  #map-container {
+    flex: 1 1 45%;
+    height: 100%;
+    overflow: hidden; 
+    z-index: 10000!important;
+  }
+  
+  #info-container {
+    display: none; 
+    flex: 1 1 47%;
+    height: 100%;
+    background-color:#faf9f9;
+    color: #393e46;
+    border-left: 17px solid #faf9f9;
+  }
+  
+  .pincode-container {
+    display: flex;
+    align-items: center;
+    padding-left: 20px; 
+    padding-right: 20px; 
+    padding-top: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    /* adds a black line */
+    padding-bottom: 30px; /* provides some space between the content and the line */
+    margin-bottom: 10px;
+  
+  }
+  
+  .pincode-container-map {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    align-items:self-start;
+    padding-left: 20px; 
+    padding-right: 20px; 
+    padding-top: 30px;
+    border-bottom: 1px solid #e0e0e0;
+    /* adds a black line */
+    padding-bottom: 20px; /* provides some space between the content and the line */
+    margin-bottom: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
+  }
+  
+  .pincode-container {
+    display: flex;
+    align-items: center;
+    padding-left: 20px; 
+    padding-right: 20px; 
+    padding-top: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    /* adds a black line */
+    padding-bottom: 30px; /* provides some space between the content and the line */
+    margin-bottom: 10px;
+  
+  }
+  
+  #pincode {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 5px; /* Space after 'Enter Pincode:' label */
+    margin-right: 20px; /* Space before the [submit] button */
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    height:50px;
+  
+   
+  }
+  
+  #submitPincode {
+    padding: 8px 12px;
+    outline:none;
+    border: 1.7px solid #ccc;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fafafa;
+    cursor: pointer;
+    transition: 0.3s background-color;
+    height:50px;
+    width:90px;
+    
+  }
+  
+  #submitPincode:hover {
+    background-color: #0056b3;
+  }
+  
+  .pincode-container label {
+    position: relative;
+    top: 22px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    height:50px;
+    width:75px;
+  }
+  
+  .pincode-label {
+    font-weight:500;
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:#606470;
+  }
+  
+  .pincode-placeholder {
+    font-weight:500;
+    font-size: 15px;
+    background-color: #f7f7f7;
+    
+    font-family: fantasy; 
+  
+  }
+  
+  .pincode-placeholder::placeholder {
+    color: #d8d7d7; /* Change to the desired color. This example is red. */
+    opacity: 1; /* Ensure that it's fully visible */
+    font-style: oblique;
+  }
+  
+  
+  .pincode-submit {
+  
+    font-weight:500;
+    font-size: 15px;
+  }
+  
+  
+  .pincode-tabs {
+    border-top: 1px solid #e0e0e0;    /* adds a black line at the top */
+    padding-top: 10px;
+  }
+  
+  .nav-link {
+    font-size: 20px;
+    padding: 15px 30px;
+    margin-right: 15px;
+    border-radius: 4px;
+    margin-top: 20px;
+  }
+  
+  .pincode-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: none;
+  }
+  
+  .nav-link:focus {
+    outline: none !important;  /* Remove the default browser outline */
+    box-shadow: none !important; /* Remove the Bootstrap's default box-shadow or other styling */
+    border-color: transparent !important; }
+  
+    
+  .nav-link.active {
+    border-color: transparent !important;
+  }
+  
+  .main-button {
+  padding-top: 30px;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-bottom: 30px;
+  border-radius: 50px !important;
+  color:#fff;
+  font-weight: 700;
+  font-size: 1.6rem;
+  transition: all 0.3s;
+  box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.1), 4px 5px 10px rgba(91, 85, 85, 0.7);
+  letter-spacing: 0.95px;
+  }
+  
+  
+  
+  
+  button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* A subtle shadow for focus on all sides */
+  }
+  
+  /* rulesearch parameter */
+  
+  .dropdown-container {
+    margin-top: 30px;  /* adds space between the pincode section and this container */
+  }
+  
+  
+  #rule-search.form-control {
+    background-color: #F1F1F1;
+    height: 50px;  /* Adjust the height of the dropdown */
+    margin-top: 25px;
+    font-weight: 400;             
+    font-size: 16px;              
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #606470;
+    padding: 10px 20px;
+    line-height: 20px;  /* Adjust the line height to center the text vertically */
+  }
+  
+  #ruleSearchDropdown {
+    background-color: #F1F1F1; /* Adjust the background color */
+     /* Adjust the border color */
+    color: #606470; /* Adjust the text color */
+    border-radius: 5px; /* This makes the button corners rounded, adjust as needed */
+    font-size: 16px; /* Adjust the font size */
+    padding: 10px 125px; /* Adjust the padding for the button text */
+    
+  }
+  #ruleSearchDropdown:focus {
+    outline: none !important;
+  }
+  
+  #ruleSearchDropdown:hover, #ruleSearchDropdown:focus {
+    /* background-color: #6a6a6a;  */
+    /* Adjust the hover/focus background color */
+    /* color: #fff;  */
+    /* Adjust the hover/focus text color */
+  }
+  
+  .sub-dropdown-box {
+  margin-top: 30px;
+  width:442px;
+  height: 160px;
+  
+  }
+  
+  .dd-parameter1 {
+    border: 1px solid black;
+    width:100%;
+    /* margin-left: 100px; */
+    padding:10px;
+   
+  
+  
+  }
+  
+  
+  
+  #ruleSearchSelect {
+    appearance: button;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    text-align: center;
+    background-color: #f8f9fa; /* match the bootstrap btn-secondary color */
+    border: 1px solid #dee2e6; /* match the bootstrap btn-secondary border */
+    padding: 0.375rem 0.75rem; /* match the bootstrap btn padding */
+  }
+  
+  
+  .option123{
+    margin-top: 20px;
+    height: 50px; 
+    border-radius: 20px;
+    padding-right:20px;
+    padding-left: 20px;
+    
+  }
+  
+  .option1234{
+  
+    height: 50px; 
+    border-radius: 20px;
+    padding-right:20px;
+    padding-left: 20px;
+    
+  }
+  
+  /* end of rulesearchparameter */
+  
+  
+  
+  
+  
+  
+  
+  
+  /*
+  mild black:#606470  (navbar )
+  mild black:#393e46
+  
+  grey:#e0e0e0; (simple line)
+  grey:#F1F1F1;
+  
+  
+  */
+  
+  
+  /* logo */
+  .cos-logo {
+    width: 148px;  /* Adjust as needed */
+    height: auto;  /* This ensures the aspect ratio of the logo is maintained */
+  }
+  
+  .logo-text {
+    color:#cf711f;
+    /* font-family: 'Rubik', sans-serif; */
+    font-family: 'Dancing Script', cursive;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    font-style:;
+    font-size: 24px;  /* adjust based on your needs */
+    margin-left: 150px; /* space between logo and the text */
+    vertical-align: middle; /* centers text vertically relative to the logo */
+  
+    color: #3498db; /* Or any color you like */
+    /* OR for a gradient */
+    background: linear-gradient(to right,black, black);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  
+  a:hover, a:focus {
+    outline: none;
+    text-decoration: none; /* This removes the underline which might be mistaken as a "broken line". */
+  }
+  
+  
+  /* end of logo */
+  
+  /* close button */
+  #mapCloseButton {
+    position: absolute;
+    top: 9px;
+    right: 13px;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    box-shadow: none;  /* This line removes any shadows */
+  }
+  
+  #mapCloseButton .fas {
+    font-size: 15px;
+    color: red;
+  }
+  
+  #mapCloseButton:hover .fas {
+    color: darkred;
+  }
+  
+  #mapCloseButton:active, #mapCloseButton:focus {
+    box-shadow: none;  
+  }
+  /* end of close  */
+  
+  
+  /* service section */
+  
+   /* 6 grid portion start forced*/
+  
+    /* 6 grid portion end  forced*/
+  
+      .quick-services .service-box {
+        background-color: rgb(255, 255, 255);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          border: 1px solid rgb(255, 255, 255); /* Border added */
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+          padding: 20px;
+          margin: 10px 0;
+          padding-top: 50px ;
+          padding-right: 50px;
+          padding-left: 50px;
+         
+          
+      }
+      .quick-services .service-box {
+        min-height: 550px !important; /* Adjust this value as per your need */
+    }
+   
+    .service-box :hover{
+      -webkit-transform: skewY(0deg) skewX(0deg) scale(1.1);
+      transform: skewY(0deg) skewX(0deg) scale(1.1);
+      text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); 
+      transition: transform 0.7s ease, text-shadow 0.7s ease;  /* Transition properties */
+  }
+    
+      .service-img-container {
+          width: 70px;
+          height: 70px;
+          overflow: hidden;  
+          margin: 20px 0;
+      }
+  
+      .service-img {
+          width: 100%;
+          height: auto;
+      }
+  
+      .service-description {
+          margin-top: 50px ;
+          color: #8e9398;
+          font-family: "Rubik", sans-serif ;
+          line-height: 40px;
+          font-weight: 400;
+          font-size: 17px;
+  
+      }
+  
+      .service-link {
+          color: blue;
+          text-decoration: underline;
+          cursor: pointer;
+          
+      }
+  
+      #read-more {
+  
+        font-family: "Rubik", sans-serif ;
+          line-height: 40px;
+          font-weight: 400;
+          font-size: 17px;
+  
+      }
+  
+    
+  
+  .container-2 {
+    background-color: #fdf2e9;
+  }
+  
+  
+  /* title bar */
+  .text-center {
+    text-align: center!important;
+  }
+  
+  .slider-text {
+    position: absolute;
+    top: 215px;
+    left: 0;
+    right: 0;
+   
+  }
+  
+  /* @keyframes blink {
+    0%, 100% {opacity: 1;}
+    50% {opacity: 0;}
+  } */
+  
+  
+  /* #blinking-text {
+  animation: blink 2.8s linear infinite;
+  font-weight: 700;
+  font-size: 40px;
+  color:wheat;
+  letter-spacing: 3px;
+  } */
+  
+  @keyframes blink {
+    0%, 3% {
+        opacity: 1;
+    }
+    4%, 9% {
+        opacity: 0.3;
+    }
+    10%, 15% {
+        opacity: 0.6;
+    }
+    16%, 23% {
+        opacity: 1;
+    }
+    24%, 26% {
+        opacity: 0.4;
+    }
+    27%, 33% {
+        opacity: 1;
+    }
+    34%, 36% {
+        opacity: 0.3;
+    }
+    37%, 41% {
+        opacity: 0.7;
+    }
+    42%, 47% {
+        opacity: 1;
+    }
+    48%, 50% {
+        opacity: 0.3;
+    }
+    51%, 57% {
+        opacity: 0.9;
+    }
+    58%, 60% {
+        opacity: 0.2;
+    }
+    61%, 68% {
+        opacity: 1;
+    }
+    69%, 71% {
+        opacity: 0.4;
+    }
+    72%, 76% {
+        opacity: 0.6;
+    }
+    77%, 82% {
+        opacity: 1;
+    }
+    83%, 84% {
+        opacity: 0.3;
+    }
+    85%, 87% {
+        opacity: 0.8;
+    }
+    88%, 90% {
+        opacity: 0.5;
+    }
+    91%, 94% {
+        opacity: 0.8;
+    }
+    95%, 100% {
+        opacity: 1;
+    }
+  }
+  
+  #blinking-text {
+    animation: blink 2.7s linear infinite;
+    font-weight: 700;
+    font-family:lato;
+    font-size: 40px;
+    color: #ffffff; 
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px #000000, 0 0 20px #fff41e, 0 0 80px #ffcb1e, 0 0 120px #000000;   
+  }
+                 
+  
+  
+  
+  /* footer */
+  .footer-bottom {
+    opacity: 0.68;
+    background: #67B26F;
+    background-image: linear-gradient(to left, #ffc93c, #ffcf63, #ffd584, #ffdca3, #ffe4c2, #ffe4c2, #ffe4c2, #ffe4c2, #ffdca3, #ffd584, #ffcf63, #ffc93c);
+    padding: 43px;
+    color: #393e46;
+    
+    font-weight: 200;
+    font-size: 17px;
+  }
+  
+  .row {
+  
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  
+  .text-center {
+    text-align: center !important;
+  
+  }
+  
+  
+  #footer-margin {
+    margin-top: -10px !important;
+    margin-bottom: -10px !important;
+  } 
+  
+  
+  
+  /* container 3 */
+  
+  .container-3 {
+  margin-top: 54px;
+    height: 150px;
+  }
+  
+  .icon-words {
+  
+    font-size: 17px;
+    margin-left: 10px;
+  }
+  
+  
+  /* container-2 */
+  .container-2{
+    padding-top:70px;
+    padding-bottom:70px;
+  }
+  
+  
+  /* naturos css  video container*/
+  .section-stories {
+    position: relative;
+    padding: 15rem 0;
+    height: 700px; }
+    
+    /* @media only screen and (max-width: 56.25em) {
+      .section-stories {
+        padding: 10rem 0;
+        height: 400px; } } */
+  
+  .bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  /* opacity: .15; */
+  opacity: .16;
+  overflow: hidden;
+  }
+  
+  .bg-video__content {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover; 
+  }
+  
+  
+  .heading-secondary {
+  margin-left: 40px;
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  background-image: linear-gradient(to right, #888, #888);
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: .2rem;
+  -webkit-transition: all .2s;
+  transition: all .2s; 
+  }    
+  @media only screen and (max-width: 56.25em) {
+                  .heading-secondary {
+                    font-size: 3rem; } }
+              
+                  @media only screen and (max-width: 37.5em) {
+                  .heading-secondary {
+                    font-size: 2.5rem; } }
+  .heading-secondary:hover {
+  -webkit-transform: skewY(0deg) skewX(0deg) scale(1.1);
+  transform: skewY(0deg) skewX(0deg) scale(1.1);
+  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); 
+  }      
+  
+  
+  .video-text-container {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .heading-secondary {
+    flex: 3;  /* 30% of the container width */
+    margin-top: 159px;
+    height: 34px;
+  }
+  
+  .description-text {
+    flex: 7;  /* 70% of the container width */
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: -59px;
+    width: 200px;
+    padding: 200px 90px;
+    background-color: rgba(255, 255, 255, 0.7);  /* 70% opacity */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);  /* Example box shadow */
+    font-weight: 400;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  
+  
+  /* start of register now section */
+  
+  
+  .project {
+    background-image: url("../images/project.png");
+    background-color: #42545d;
+    height: 350px;
+  }
+  .text-center {
+    text-align: center !important;
+  }
+  
+  .btn-register {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: white;
+    border: 1px solid black;
+    padding: 15px 40px;
+    font-size: 20px;
+    line-height: 1.5;
+    border-radius: 13px;
+    font-family: "Rubik", sans-serif;
+  }
+  .projet-heading {
+    font-size: 40px;
+    padding-top: 37px;
+    color: #ffffff;
+    font-weight: 400;
+    margin-bottom: 45px;
+    font-family: "Rubik", sans-serif;
+  }
+  .pro-desc h4 {
+    color: #fffbfb;
+    margin-bottom: 20px;
+  font-size: 17px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  /* .btn-register:hover {
+    color: #000 ;
+  } */
+  /* end of register now section */
+  
+  
+  
+   /* start of link section  */
+  
+   .footer h2 {
+    opacity: 1;
+    font-family: 'Nunito';
+    font-size: 18px;
+    font-family: "Rubik", sans-serif;
+    line-height: 1.28;
+    letter-spacing: normal;
+    color: #b33232;
+  }
+  
+  
+  .footer p {
+  
+      color: #363636;
+      font-family: 'Nunito';
+      text-align: justify;
+      font-size: 14px;
+  
+  }
+  
+  p {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  
+  /* .footer h2:hover, i:hover, a:hover {
+    color: #5e51b9;
+  } */
+  
+  .social li img {
+    height: 20px;
+  }
+  img {
+    vertical-align: middle;
+    border-style: none;
+  }
+  .footer ul {
+    list-style-type: none;
+    font-family: 'Nunito';
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2.35;
+    letter-spacing: normal;
+    padding: 0px;
+  }
+  .social {
+    display: flex;
+  }
+  
+  a {
+    color: #5e00ff;
+    text-decoration: none;
+  }
+  
+  
+  img {
+    vertical-align: middle;
+    border-style: none;
+  }
+  
+  .first-link-box{
+  margin-top: 50px;
+  margin-left: 80px;;
+  }
+  
+  .office {
+  margin-bottom: -30px;
+  margin-left:-8px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+  
+  }
+  
+  .contact {
+    margin-bottom:15px;
+  }
+  
+  .office-desc{
+    font-family: "Rubik", sans-serif !important;
+    margin-bottom: -0.5px;
+    font-weight: 300;
+    color: #8e9398!important;
+  }
+  
+  .office-mail {
+    color: #8e9398!important;
+    font-family: "Rubik", sans-serif !important;
+    font-weight: 300;
+  
+  
+  }
+  
+  .product-list {
+  color: #8e9398!important;
+  text-decoration:none;
+  font-family: "Rubik", sans-serif !important;
+  }
+  
+  .qr {
+    color: #8e9398!important;
+    text-decoration:none;
+    font-family: "Rubik", sans-serif !important;
+    }
+  
+  .qr-img {
+  margin-top:-10px;
+  width: 129px;
+  
+  }
+  
+  .app-img {
+    margin-top:-10px;
+    width: 129px;
+  
+  }
+  
+  .link-container{
+    margin-bottom: 40px;
+  }
+   /* end of link section */
+  
+  
+   .action-buttons {
+    position: absolute;
+    bottom: 270px; /* Adjust this value as necessary */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    
+  }
+  
+  
+  /* second buttons  */
+  .second-button {
+  
+    border-radius: 30px;
+    
+  }
+  
+  
+  .action-buttons button {
+    font-family: 'Rubik', sans-serif;
+    font-size: 16px;  /* adjust this value to your desired font size */
+    font-weight: 500; /* weight based on the available weights you've linked */
+    letter-spacing: 0.5px;
+    background-color: #fffbfb;
+    color: #000;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    /* Any other font styling properties you want to add */
+    
+      margin-left: 26px;  /* Adjust this value to increase or decrease spacing */
+  
+  
+  }
+  
+  
+  .building-dropdown {
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+    font-size: 13px;
+  }
+  
+  .country {
+    margin-top: 3px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+    font-size: 15px;
+    margin-bottom: 8px;
+  
+  }
+  
+  .sub-dropdown-box1 {
+    margin-top: 3px;
+    width: 442px;
+    height: 160px;
+  }
+  
+  .country2 {
+    margin-top: 3px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+    font-size: 13px;
+    margin-bottom: 2px;
+  
+  }
+  
+  .dropdown-container2{
+    margin-top: 10px;  /* adds space between the pincode section and this container */
+  }
+  
+  .option1236 {
+    margin-top: 13px;
+      height: 50px;
+      border-radius: 20px;
+      padding-right: 20px;
+      padding-left: 20px;
+  }
+  
+  .sub-dropdown-box3 {
+    margin-top: 3px;
+    width: 442px;
+    height: 144px;
+  }
+  
+  .new {
+  margin-bottom: 36px !important;
+  
+  }
+  
+        /* Style for the overlay container */
+        .overlay-container {
+          position: fixed;  /* Takes the container out of the normal flow */
+          top: 92px;
+          left: 500px;
+          z-index: 10000;      /* Ensures the container is on top of other elements */
+          background: #ffffff;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+  
+      /* Some style for the below elements to show overlay effect */
+      .below-element {
+          width: 100%;
+          height: 500px;
+          background-color: #e0e0e0;
+          margin-top: 50px;
+          padding: 20px;
+      }
+  
+
+      /* header-book */
+      .cart {
+        position: relative;
+        display: block;
+        width: 30px;
+        height: 28px;
+        height: auto;
+        overflow: hidden;
+        margin-top: -7px;
+        .material-icons {
+          position: relative;
+          top: 4px;
+          z-index: 1;
+          font-size: 34px;
+          color: rgb(76, 74, 74);
+        }
+        .count {
+          position: absolute;
+          top: 0;
+          right: 0;
+          z-index: 2;
+          font-size: 11px;
+          border-radius: 50%;
+          background: #d60b28;
+          width: 16px;
+          height: 16px;
+          line-height:16px;
+          display: block;
+          text-align: center;
+          color: white;
+          font-family: 'Roboto', sans-serif;
+          font-weight: bold;
+        }
+      }
