@@ -6,3 +6,6 @@ def base(request):
 
 def loginpage(request):
     return render(request,'bookshopapp/loginpage.html')
+
+def test(request):
+    return render(request,'bookshopapp/test.html')
