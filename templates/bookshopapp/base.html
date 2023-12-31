@@ -73,178 +73,19 @@ background-image: url('{% static "assets/vendor/libs/report-gen/bookcover.jpeg" 
 </header>
 
 <div class="text-center slider-text">
-    <h1 id="blinking-text" >Need a Quick Building Plan Compliance Check ?</h1>
+    <h1 id="blinking-text" >Take a Quick look at our Featured books </h1>
 </div>
 
 <main class="content-placeholder">
     
     <div class="button-container style="position: relative;">
-        <button class=" main-button center-button" id="showMapButton">Select Local Body</button>
-        <button class=" main-button center-button">Select Building Type</button>
-        <button class="main-button center-button">Select Building Sub Type</button>
-        <button class="main-button center-button">View Rule</button>
-        <div id = "big-container">
+        <div class="row">
 
-            <!-- close button -->
-            <button id="mapCloseButton" class="btn btn-primary">
-                <i class="fas fa-times"></i>
-            </button>
-
-          <div id="map-container">
-            
+            <button class="fortnite">FEATURED BOOKS<span class = fspan></span></button>
+           
           </div>
-          <div id="info-container"> 
-            <nav>
-              <div class=" pincode-tabs nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Map</button>
-                <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Pincode</button>
-                <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">ULB name</button>
-              </div>
-            </nav>
-            <div class="tab-content" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                <div class="pincode-container-map">
-                    <h5>Point Map reference:</h5>
-                    <h5>Address (nearest)</h5>
-                    <h5>Pincode</h5>
-                    <div><h2>local body</h2></div>
-                </div>
-                
-                <div class="dropdown-container">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="ruleSearchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Rule Search Parameter
-                        </button>
-                        
-                        <div class="dropdown-menu sub-dropdown-box" aria-labelledby="ruleSearchDropdown">
-                            
-                            <!-- First dropdown -->
-                            <select class="form-control option123 prevent-close building-dropdown   " id="ruleSearchSelect1">
-                                <option  value="Option 1">Select Building Type</option>
-                                
-                    
-                            </select>
-                            
-                            <!-- Second dropdown -->
-                            <select class="form-control option1234 prevent-close mt-2 building-dropdown  " id="ruleSearchSelect2">
-                                <option  value="Option 1">Select Building Sub Type</option>
-                            </select>
-                            
-                        </div>
-                    </div>
-                </div>
-              </div>
-              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                <div class="pincode-container">
-                    <label class = pincode-label for="pincode"> Pincode : </label>
-                    <input type="text" class = "pincode-placeholder "id="pincode" placeholder="        Enter Pincode">
-                    <button class = "pincode-submit" id="submitPincode">OK</button>
-                </div>
-
-
-
-                <!-- reusable component Rulesearchparameter -->
-
-
-
-                <!-- Inside Rulesearchparameter -->
-
-<div class="dropdown-container">
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="ruleSearchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Rule Search Parameter
-        </button>
-        
-        <div class="dropdown-menu sub-dropdown-box" aria-labelledby="ruleSearchDropdown">
-            
-            <!-- First dropdown -->
-            <select class="form-control option123 prevent-close building-dropdown " id="ruleSearchSelect1">
-                <option  value="Option 1">Select Building Type</option>
-                
-            </select>
-            
-            <!-- Second dropdown -->
-            <select class="form-control option1234 prevent-close mt-2 building-dropdown " id="ruleSearchSelect2">
-                <option  value="Option 1">Select Building Type</option>
-                
-            </select>
-            
-        </div>
-    </div>
-</div>
-
-            </div>
-            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-
-                <div class="pincode-container-ulb">
-                    <!-- First dropdown for selecting country -->
-                    <label  class = "country"for="selectCountry">Select Country:</label>
-                    <select class="form-control country2" id="selectCountry">
-                        <option  value="Option 1">Select Building Type</option>
-                        <option value="Country2">Country2</option>
-                        <!-- Add more options as needed -->
-                    </select>
-            
-                    <!-- Second dropdown for selecting state -->
-                    <label class = "country"for="selectState" class="mt-2">Please Select State:</label>
-                    <select class="form-control country2" id="selectState">
-                        <option value="State1">State1</option>
-                        <option value="State2">State2</option>
-                        <!-- Add more options as needed -->
-                    </select>
-            
-                    <!-- Third dropdown for selecting city -->
-                    <label class = "country" for="selectCity" class="mt-2">Please Select City:</label>
-                    <select class="form-control country2" id="selectCity">
-                        <option value="City1">City1</option>
-                        <option value="City2">City2</option>
-                        <!-- Add more options as needed -->
-                    </select>
-            
-                    <!-- Fourth dropdown for selecting local body -->
-                    <label class = "country"for="selectLocalBody" class="mt-2">Please Select Local Body:</label>
-                    <select class="form-control country2" id="selectLocalBody">
-                        <option value="LocalBody1">LocalBody1</option>
-                        <option value="LocalBody2">LocalBody2</option>
-                        <!-- Add more options as needed -->
-                    </select>
-                </div>
-                <div class="dropdown-container2">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="ruleSearchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Rule Search Parameter
-                        </button>
-                        
-                        <div class="dropdown-menu sub-dropdown-box3" aria-labelledby="ruleSearchDropdown">
-                            
-                            <!-- First dropdown -->
-                            <select class="form-control option1236 prevent-close building-dropdown" id="ruleSearchSelect1">
-                                <option  value="Option 1">Select Building Type</option>
-                                
-                            </select>
-                            
-                            <!-- Second dropdown -->
-                            <select class="form-control option1234 prevent-close mt-2 building-dropdown" id="ruleSearchSelect2">
-                                <option  value="Option 1">Select Building Type</option>
-                            </select>
-                            
-                        </div>
-                    </div>
-                    </div>
-            
-                
-            </div>
-            <!-- ulb end of dropdowns -->
-
-            <!-- end of rulesearchparamter -->
-        </div>
-        <div class="tab-content" id="nav-tabContent">
-            <!-- ... (your existing code inside tab-content) ... -->
-        
-        
-        </div>
-    </div>
-            </div>
+    
+       
         </div>
         <div class="action-buttons">
             <button class="btn btn-primary mr-2 second-button">Plan Draft</button>

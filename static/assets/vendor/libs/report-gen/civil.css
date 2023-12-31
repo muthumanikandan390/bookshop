@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css?family=Open%20Sans:800');
 
 * {
   padding: 0;
@@ -1366,3 +1366,95 @@ margin-bottom: 36px !important;
         margin-top: 50px;
         padding: 20px;
     }
+
+
+/* fortnite button */
+:root {
+  --font: 2rem;
+}
+
+
+
+/* .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+} */
+
+.fortnite {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  font-family: 'Open Sans';
+  font-size: 80px;
+  border-radius: calc(var(--font) * 0.6);
+  padding: calc(var(--font) * 0.5);
+  margin: 0;
+  line-height: 1;
+  position: relative;
+  background-color: transparent;
+  color: white;
+  box-shadow: inset 0 0 0 0 rgb(248, 249, 255, 0.5), inset 0 0 0 0 rgb(248, 249, 255, 0.3), 0 0 0 rgb(248, 249, 255, 0.2);
+  transition: all ease 0.2s;
+}
+
+.fortnite:hover {
+  box-shadow: inset 0 0 0 calc(var(--font) * 0.2) rgb(248, 249, 255, 0.5), inset 0 0 calc(var(--font) * 0.2) calc(var(--font) * 0.5) rgb(248, 249, 255, 0.3), 0 0 calc(var(--font) * 0.2) rgb(248, 249, 255, 0.2);
+}
+
+
+.fortnite::before {
+  content: '';
+  height: 110%;
+  width: 105%;
+  position: absolute;
+  border-radius: calc(var(--font) * 0.8);
+  background-color: transparent;
+}
+
+
+
+
+.fortnite:hover::before {
+  border: solid rgb(210, 255, 227, 0.8);
+  padding: calc(var(--font) * 0.08);
+  box-shadow: inset 0 0 calc(var(--font) * 0.2) calc(var(--font) * 0.2) rgb(186, 201, 255, 0.3);
+  filter: blur(calc(var(--font) * 0.06));
+  animation: borders infinite 2s linear;
+  opacity: 0.5;
+}
+
+.fspan {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
+  display: flex;
+  border-radius: calc(var(--font) * 0.6);
+  z-index: -1;
+}
+
+.fspan::after {
+  content: '';
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: linear-gradient(90deg, rgb(248, 249, 255, 0), rgb(206, 216, 255, 0.6), rgb(248, 249, 255, 0));
+  opacity: 0;
+  transform: translateX(-100%);
+  
+}
+
+.fortnite:hover > .fspan::after {
+  opacity: 1;
+  transform: translateX(100%);
+  transition: all ease 1s;
+}
+
+
+

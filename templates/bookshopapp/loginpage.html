@@ -99,184 +99,23 @@
 </header>
 
 <div class="text-center slider-text">
-    <h1 id="blinking-text" >Need a Quick Building Plan Compliance Check ?</h1>
+    <h1 id="blinking-text" >Take a Quick look at our Top selling Books </h1>
 </div>
 
 <main class="content-placeholder">
     
     <div class="button-container style="position: relative;">
-        <button class=" main-button center-button" id="showMapButton">Select Local Body</button>
-        <button class=" main-button center-button">Select Building Type</button>
-        <button class="main-button center-button">Select Building Sub Type</button>
-        <button class="main-button center-button">View Rule</button>
-        <div id = "big-container">
+        <div class="row">
 
-            <!-- close button -->
-            <button id="mapCloseButton" class="btn btn-primary">
-                <i class="fas fa-times"></i>
-            </button>
-
-          <div id="map-container">
-            
+            <button class="fortnite">FEATURED BOOKS<span class = fspan></span></button>
+           
           </div>
-          <div id="info-container"> 
-            <nav>
-              <div class=" pincode-tabs nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Map</button>
-                <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Pincode</button>
-                <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">ULB name</button>
-              </div>
-            </nav>
-            <div class="tab-content" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                <div class="pincode-container-map">
-                    <h5>Point Map reference:</h5>
-                    <h5>Address (nearest)</h5>
-                    <h5>Pincode</h5>
-                    <div><h2>local body</h2></div>
-                </div>
-                
-                <div class="dropdown-container">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="ruleSearchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Rule Search Parameter
-                        </button>
-                        
-                        <div class="dropdown-menu sub-dropdown-box" aria-labelledby="ruleSearchDropdown">
-                            
-                            <!-- First dropdown -->
-                            <select class="form-control option123 prevent-close building-dropdown   " id="ruleSearchSelect1">
-                                <option  value="Option 1">Select Building Type</option>
-                                
-                    
-                            </select>
-                            
-                            <!-- Second dropdown -->
-                            <select class="form-control option1234 prevent-close mt-2 building-dropdown  " id="ruleSearchSelect2">
-                                <option  value="Option 1">Select Building Sub Type</option>
-                            </select>
-                            
-                        </div>
-                    </div>
-                </div>
-              </div>
-              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                <div class="pincode-container">
-                    <label class = pincode-label for="pincode"> Pincode : </label>
-                    <input type="text" class = "pincode-placeholder "id="pincode" placeholder="        Enter Pincode">
-                    <button class = "pincode-submit" id="submitPincode">OK</button>
-                </div>
-
-
-
-                <!-- reusable component Rulesearchparameter -->
-
-
-
-                <!-- Inside Rulesearchparameter -->
-
-<div class="dropdown-container">
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="ruleSearchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Rule Search Parameter
-        </button>
         
-        <div class="dropdown-menu sub-dropdown-box" aria-labelledby="ruleSearchDropdown">
-            
-            <!-- First dropdown -->
-            <select class="form-control option123 prevent-close building-dropdown " id="ruleSearchSelect1">
-                <option  value="Option 1">Select Building Type</option>
-                
-            </select>
-            
-            <!-- Second dropdown -->
-            <select class="form-control option1234 prevent-close mt-2 building-dropdown " id="ruleSearchSelect2">
-                <option  value="Option 1">Select Building Type</option>
-                
-            </select>
-            
+       
         </div>
-    </div>
-</div>
-
-            </div>
-            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-
-                <div class="pincode-container-ulb">
-                    <!-- First dropdown for selecting country -->
-                    <label  class = "country"for="selectCountry">Select Country:</label>
-                    <select class="form-control country2" id="selectCountry">
-                        <option  value="Option 1">Select Building Type</option>
-                        <option value="Country2">Country2</option>
-                        <!-- Add more options as needed -->
-                    </select>
-            
-                    <!-- Second dropdown for selecting state -->
-                    <label class = "country"for="selectState" class="mt-2">Please Select State:</label>
-                    <select class="form-control country2" id="selectState">
-                        <option value="State1">State1</option>
-                        <option value="State2">State2</option>
-                        <!-- Add more options as needed -->
-                    </select>
-            
-                    <!-- Third dropdown for selecting city -->
-                    <label class = "country" for="selectCity" class="mt-2">Please Select City:</label>
-                    <select class="form-control country2" id="selectCity">
-                        <option value="City1">City1</option>
-                        <option value="City2">City2</option>
-                        <!-- Add more options as needed -->
-                    </select>
-            
-                    <!-- Fourth dropdown for selecting local body -->
-                    <label class = "country"for="selectLocalBody" class="mt-2">Please Select Local Body:</label>
-                    <select class="form-control country2" id="selectLocalBody">
-                        <option value="LocalBody1">LocalBody1</option>
-                        <option value="LocalBody2">LocalBody2</option>
-                        <!-- Add more options as needed -->
-                    </select>
-                </div>
-                <div class="dropdown-container2">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="ruleSearchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Rule Search Parameter
-                        </button>
-                        
-                        <div class="dropdown-menu sub-dropdown-box3" aria-labelledby="ruleSearchDropdown">
-                            
-                            <!-- First dropdown -->
-                            <select class="form-control option1236 prevent-close building-dropdown" id="ruleSearchSelect1">
-                                <option  value="Option 1">Select Building Type</option>
-                                
-                            </select>
-                            
-                            <!-- Second dropdown -->
-                            <select class="form-control option1234 prevent-close mt-2 building-dropdown" id="ruleSearchSelect2">
-                                <option  value="Option 1">Select Building Type</option>
-                            </select>
-                            
-                        </div>
-                    </div>
-                    </div>
-            
-                
-            </div>
-            <!-- ulb end of dropdowns -->
-
-            <!-- end of rulesearchparamter -->
-        </div>
-        <div class="tab-content" id="nav-tabContent">
-            <!-- ... (your existing code inside tab-content) ... -->
-        
-        
-        </div>
-    </div>
-            </div>
-        </div>
-        <div class="action-buttons">
-            <button class="btn btn-primary mr-2 second-button">Plan Draft</button>
-            <button class="btn btn-primary mr-2 second-button">Plan Check</button>
-            <button class="btn btn-primary mr-2 second-button">Plan Assist</button>
-        </div>
+       
+          
+      
 
         </div>
     
@@ -313,6 +152,7 @@
                     <a href="#" id ="read-more" class="service-link">Read more</a>
                 </div>
             </div>
+            
             
             <!-- Grid 3 -->
             <div class="col-md-4">
@@ -403,10 +243,13 @@
     <div class="u-center-text u-margin-bottom-big">
         <div class="video-text-container">
             <h2 class="heading-secondary">
-                What is <span style="color:#e67e22;">Cos</span><span style="color:black;">Ai</span> ?
+                Why <span style="color:#e67e22;">Bookify</span>
             </h2>
             <h2 class="description-text">
-                Creating building plans and designs, while taking into consideration latest development control (DC) rules with periodic amendments is a daunting task taking away your crucial intellectual time. Adding to the stress are tight deadlines and your client expectations of avoiding recycle of plan approval process.
+                
+Welcome to Bookify, where premium reads meet unbeatable prices! Dive into a curated collection of popular books for a literary journey like no other. We pride ourselves on offering a touch of luxury at reasonable costs.
+
+For our registered Bookify users, the excitement goes further with exclusive 50% off discounts on special occasions. It's our way of saying thank you for being part of our community of book enthusiasts.
             </h2>
         </div>
     </div>
@@ -417,7 +260,7 @@
 <!-- end naturos video container  -->
 
 <!-- register now section -->
-<div class="row project text-center">
+<!-- <div class="row project text-center">
     <div class="col-md-12 col-lg-12 text-center">
         <h2 class="projet-heading">To Unleash the True ARCHITECT in you!!</h2>
         <div class="container pro-desc">
@@ -429,7 +272,7 @@
         <input name="Button4" type="button" id="Button4" value="Register Now" class="btn-register project-btn mt-5" data-toggle="modal" data-target="#register">
     </div>
     <div style="padding:1%;"></div>
-</div>
+</div> -->
 
 <!-- end of register now section -->
 <!-- start of link section -->
@@ -437,14 +280,14 @@
 <div class="row footer link-container" id="contactus">
     <div class="col-md-4 col-sm-4 col-lg-4 first-link-box">
         <h2 class = "contact">Contact </h2>
-        <p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;<b class ="office">Office Address</b></p>
+        <p><i class= aria-hidden="true"></i>&nbsp;&nbsp;<b class ="office">Office Address</b></p>
         <p class="office-desc">COS AI,
             No.6/13, Ground Floor,
             Kamaraj Nagar 4th Street,
             Tallakulam, Madurai-625002
             Phone: 0452-3500776</p>
         <div style="padding: 2%;"></div>
-        <p class ="office-mail"><i class="fa fa-envelope office-mail" aria-hidden="true"></i>coscmd@gmail.com</p>
+        <p class ="office-mail"><i class= aria-hidden="true"></i>coscmd@gmail.com</p>
         <p class ="office-mail"><i class="fa fa-phone" aria-hidden="true"></i>+91-94430 63037</p>
         <h2>Follow us</h2>
         <ul class="social">
