@@ -940,7 +940,7 @@ letter-spacing: 3px;
 }
 
 #blinking-text {
-  animation: blink 2.7s linear infinite;
+  /* animation: blink 2.7s linear infinite; */
   font-weight: 700;
   font-family:lato;
   font-size: 40px;
@@ -1391,7 +1391,7 @@ margin-bottom: 36px !important;
   justify-content: center;
   border: none;
   font-family: 'Open Sans';
-  font-size: 80px;
+  font-size: 85px;
   border-radius: calc(var(--font) * 0.6);
   padding: calc(var(--font) * 0.5);
   margin: 0;
