@@ -9,3 +9,6 @@ def loginpage(request):
 
 def test(request):
     return render(request,'bookshopapp/test.html')
+
+def registerpage(request):
+    return render(request,'bookshopapp/registerpage.html')
