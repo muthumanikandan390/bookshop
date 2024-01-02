@@ -14,6 +14,9 @@ def test(request):
 def registerpage(request):
     return render(request,'bookshopapp/registerpage.html')
 
+def login_valid(request):
+    return render(request, 'bookshopapp/login_valid.html')
+
 
 def signup(request):
     if request.method == 'POST':

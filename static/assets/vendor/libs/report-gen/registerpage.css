@@ -3,6 +3,7 @@
 body {
 	font-family: Montserrat,Arial, Helvetica, sans-serif;
 	background-color:#f7f7f7;
+  background-image: linear-gradient(to right top, #eadcae, #f6c69b, #ffad99, #fe96a8, #ea87c2, #f185c4, #f882c7, #ff7fc9, #ff89a0, #ffa875, #ffd257, #f0fb5f);
 }
 * {box-sizing: border-box}
 

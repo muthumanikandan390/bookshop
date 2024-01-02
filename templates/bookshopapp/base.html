@@ -67,7 +67,7 @@ background-image: url('{% static "assets/vendor/libs/report-gen/bookcover.jpeg" 
             
             <li><a class="main-nav-link" href="#">Features</a></li>
             <li><a class="main-nav-link nav-cta" href="{% url 'registerpage' %}">Register</a></li>
-            <li><a class="main-nav-link nav-cta" href="{% url 'login-page' %}">Login</a></li>
+            <li><a class="main-nav-link nav-cta" href="{% url 'login-valid' %}">Login</a></li>
         </ul>
     </nav>
 </header>
@@ -215,7 +215,8 @@ For our registered Bookify users, the excitement goes further with exclusive 50%
                 and customer satisfaction.</h4>
         </div>
     
-        <input name="Button4" type="button" id="Button4" value="Register Now" class="btn-register project-btn mt-5" data-toggle="modal" data-target="#register">
+        <input name="Button4" type="button" id="Button4" value="Register Now" class="btn-register project-btn mt-5" data-toggle="modal" data-target="#register" onclick="window.location.href='{% url 'registerpage' %}'">
+
     </div>
     <div style="padding:1%;"></div>
 </div>
