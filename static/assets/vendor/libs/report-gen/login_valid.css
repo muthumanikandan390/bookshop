@@ -49,7 +49,7 @@ body {
   color: white;
 }
 
-::placeholder {
+.input-container .inpt::placeholder {
   font-weight: 600;
   color: white;
   opacity: 1;

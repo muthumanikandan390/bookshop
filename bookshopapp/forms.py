@@ -8,3 +8,7 @@ class SignUpForm(forms.ModelForm):
         widgets = {
             'password':forms.PasswordInput(),
         }
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length = 200,widget = forms.TextInput(attrs = {'placeholder':'Enter username'}))
+    password = forms.CharField(max_length=200,widget = forms.PasswordInput(attrs = {'placeholder': 'Enter password'}))

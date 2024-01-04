@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
-from . forms import SignUpForm
+from . forms import SignUpForm , LoginForm
+from . models import Userprofile
+from django.contrib.auth import authenticate, login
+
 
 # Create your views here.
 def base(request):
@@ -21,10 +24,21 @@ def login_valid(request):
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
+        # print(form)
         if form.is_valid():
             form.save()
-            print(form.save())
             return redirect('base')
     else:
         form = SignUpForm
     return render(request,'bookshopapp/registerpage.html',{'form':form})
+
+def login_auth(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = Userprofile.objects.get(username = username , password = password)
+        return render(request,'bookshopapp/loginpage.html',{'username':username})
+
+
+
+
