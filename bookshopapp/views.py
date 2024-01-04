@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from . forms import SignUpForm , LoginForm
 from . models import Userprofile
 from django.contrib.auth import authenticate, login
+from rest_framework import viewsets
+from . models import Book
+from . serializers import BookSerializer
 
 
 # Create your views here.
@@ -39,6 +42,8 @@ def login_auth(request):
         user = Userprofile.objects.get(username = username , password = password)
         return render(request,'bookshopapp/loginpage.html',{'username':username})
 
-
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
 
 

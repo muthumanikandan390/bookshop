@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="{% static 'assets/vendor/libs/report-gen/book-login.css' %}"/>
     {% endblock %}
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkRqO0KsS8Y36e81KV0EZJYCPLpqEsvWA&libraries=geometry"></script>
+   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -135,7 +135,7 @@
             <div class="col-md-4">
                 <div class="service-box grid-box">
                     <div class="service-img-container">
-                        <img class="service-img grid-icon" src="{% static 'assets/vendor/libs/report-gen/autocad2.png' %}" >
+                        <img class="service-img" src="" alt="Book Image">
                     </div>
                     <p class="service-description">Plan Draft enable user in creating submission building plan.</p>
                     <a href="#" id ="read-more" class="service-link ">Read more</a>
@@ -146,7 +146,7 @@
             <div class="col-md-4">
                 <div class="service-box">
                     <div class="service-img-container">
-                        <img class="service-img" src="{% static 'assets/vendor/libs/report-gen/plan.png' %}" >
+                        <img class="service-img" src="" >
                     </div>
                     <p class="service-description">Plan Check helps in creating building bye laws complaint submission drawing.</p>
                     <a href="#" id ="read-more" class="service-link">Read more</a>
@@ -158,7 +158,7 @@
             <div class="col-md-4">
                 <div class="service-box">
                     <div class="service-img-container">
-                        <img class="service-img" src="{% static 'assets/vendor/libs/report-gen/compass.png' %}" >
+                        <img class="service-img" src="" >
                     </div>
                     <p class="service-description">‘Plan Assist’ is unique AI powered platform assisting in creation of accurate and compliant building plans.</p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
@@ -169,7 +169,7 @@
             <div class="col-md-4">
                 <div class="service-box">
                     <div class="service-img-container">
-                        <img class="service-img" src="{% static 'assets/vendor/libs/report-gen/search1.png' %}" >
+                        <img class="service-img" src="" >
                     </div>
                     <p class="service-description">Get to know development control rules and regulation based on selected location and building / project parameters.</p>
                     <a href="#" id ="read-more" class="service-link">Read more</a>
@@ -180,7 +180,7 @@
             <div class="col-md-4">
                 <div class="service-box">
                     <div class="service-img-container">
-                        <img class="service-img" src="{% static 'assets/vendor/libs/report-gen/approval.png' %}" >
+                        <img class="service-img" src="" >
                     </div>
                     <p class="service-description">Complete information guide for building plan approval process to obtain construction permit certificates, NOC’s required..</p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
@@ -191,7 +191,7 @@
             <div class="col-md-4 scale">
                 <div class="service-box">
                     <div class="service-img-container">
-                        <img class="service-img" src="{% static 'assets/vendor/libs/report-gen/visual.png' %}" >
+                        <img class="service-img" src="" >
                     </div>
                     <p class="service-description">Quick rule based building plan verification based on the selected project parameters.</p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
@@ -327,6 +327,25 @@ let menu = document.querySelector('.menu');
 profile.onclick = function () {
     menu.classList.toggle('active');
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('http://localhost:8000/api/books/')
+        .then(response => response.json())
+        .then(data => {
+            const images = document.querySelectorAll('.service-img');
+            data.forEach((book, index) => {
+                console.log(data)
+                if(index < images.length) {
+                    // Prepend the static path to the image path from the database
+                    images[index].src = '/static/' + book.image_path;
+                    // Update other elements if necessary
+                }
+            });
+        })
+        .catch(error => console.error('Error:', error));
+});
+
+
 
         </script>
 </body>
