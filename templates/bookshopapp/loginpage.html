@@ -134,22 +134,45 @@
             <!-- Grid 1 -->
             <div class="col-md-4">
                 <div class="service-box grid-box">
-                    <div class="service-img-container">
+                    <div class="service-box1 service-img-container">
                         <img class="service-img" src="" alt="Book Image">
                     </div>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more" class="service-link ">Read more</a>
+                    <button class="add-to-cart">
+                        <div class="default">Add to cart</div>
+                        <div class="success">Added</div>
+                        <div class="cart">
+                            <div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="dots"></div>
+                    </button>
                 </div>
+                
             </div>
             
             <!-- Grid 2 -->
             <div class="col-md-4">
                 <div class="service-box">
-                    <div class="service-img-container">
+                    <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more" class="service-link">Read more</a>
+                    <button class="add-to-cart">
+                        <div class="default">Add to cart</div>
+                        <div class="success">Added</div>
+                        <div class="cart">
+                            <div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="dots"></div>
+                    </button>
                 </div>
             </div>
             
@@ -157,44 +180,88 @@
             <!-- Grid 3 -->
             <div class="col-md-4">
                 <div class="service-box">
-                    <div class="service-img-container">
+                    <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
+                    <button class="add-to-cart">
+                        <div class="default">Add to cart</div>
+                        <div class="success">Added</div>
+                        <div class="cart">
+                            <div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="dots"></div>
+                    </button>
                 </div>
             </div>
 
             <!-- Grid 4 -->
             <div class="col-md-4">
                 <div class="service-box">
-                    <div class="service-img-container">
+                    <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more" class="service-link">Read more</a>
+                    <button class="add-to-cart">
+                        <div class="default">Add to cart</div>
+                        <div class="success">Added</div>
+                        <div class="cart">
+                            <div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="dots"></div>
+                    </button>
                 </div>
             </div>
 
             <!-- Grid 5 -->
             <div class="col-md-4">
                 <div class="service-box">
-                    <div class="service-img-container">
+                    <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
+                    <button class="add-to-cart">
+                        <div class="default">Add to cart</div>
+                        <div class="success">Added</div>
+                        <div class="cart">
+                            <div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="dots"></div>
+                    </button>
                 </div>
             </div>
 
             <!-- Grid 6 -->
             <div class="col-md-4 scale">
                 <div class="service-box">
-                    <div class="service-img-container">
+                    <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
+                    <button class="add-to-cart">
+                        <div class="default">Add to cart</div>
+                        <div class="success">Added</div>
+                        <div class="cart">
+                            <div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="dots"></div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -288,6 +355,11 @@ For our registered Bookify users, the excitement goes further with exclusive 50%
 
 
         <script>
+             document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', e => {
+        button.classList.toggle('added');
+    });
+});
   
         var navbar = document.querySelector('.header');
             window.addEventListener('scroll', function() {
