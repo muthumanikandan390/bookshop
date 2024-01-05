@@ -137,7 +137,7 @@
                     <div class="service-img-container">
                         <img class="service-img" src="" alt="Book Image">
                     </div>
-                    <p class="service-description">Plan Draft enable user in creating submission building plan.</p>
+                    <p class="service-description"></p>
                     <a href="#" id ="read-more" class="service-link ">Read more</a>
                 </div>
             </div>
@@ -148,7 +148,7 @@
                     <div class="service-img-container">
                         <img class="service-img" src="" >
                     </div>
-                    <p class="service-description">Plan Check helps in creating building bye laws complaint submission drawing.</p>
+                    <p class="service-description"></p>
                     <a href="#" id ="read-more" class="service-link">Read more</a>
                 </div>
             </div>
@@ -160,7 +160,7 @@
                     <div class="service-img-container">
                         <img class="service-img" src="" >
                     </div>
-                    <p class="service-description">‘Plan Assist’ is unique AI powered platform assisting in creation of accurate and compliant building plans.</p>
+                    <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
                 </div>
             </div>
@@ -171,7 +171,7 @@
                     <div class="service-img-container">
                         <img class="service-img" src="" >
                     </div>
-                    <p class="service-description">Get to know development control rules and regulation based on selected location and building / project parameters.</p>
+                    <p class="service-description"></p>
                     <a href="#" id ="read-more" class="service-link">Read more</a>
                 </div>
             </div>
@@ -182,7 +182,7 @@
                     <div class="service-img-container">
                         <img class="service-img" src="" >
                     </div>
-                    <p class="service-description">Complete information guide for building plan approval process to obtain construction permit certificates, NOC’s required..</p>
+                    <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
                 </div>
             </div>
@@ -193,7 +193,7 @@
                     <div class="service-img-container">
                         <img class="service-img" src="" >
                     </div>
-                    <p class="service-description">Quick rule based building plan verification based on the selected project parameters.</p>
+                    <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
                 </div>
             </div>
@@ -232,36 +232,12 @@ For our registered Bookify users, the excitement goes further with exclusive 50%
 
   
 </section>
-<!-- end naturos video container  -->
 
-<!-- register now section -->
-<!-- <div class="row project text-center">
-    <div class="col-md-12 col-lg-12 text-center">
-        <h2 class="projet-heading">To Unleash the True ARCHITECT in you!!</h2>
-        <div class="container pro-desc">
-            <h4>CosAi saves the crucial time spent by you in rework, giving you ample time
-                for creative energies in designing better buildings, thereby gaining on revenue
-                and customer satisfaction.</h4>
-        </div>
-    
-        <input name="Button4" type="button" id="Button4" value="Register Now" class="btn-register project-btn mt-5" data-toggle="modal" data-target="#register">
-    </div>
-    <div style="padding:1%;"></div>
-</div> -->
-
-<!-- end of register now section -->
-<!-- start of link section -->
 
 <div class="row footer link-container" id="contactus">
     <div class="col-md-4 col-sm-4 col-lg-4 first-link-box">
         <h2 class = "contact">Toll free number & mail services </h2>
-        <!-- <p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;<b class ="office">Office Address</b></p> -->
-        <!-- <p class="office-desc">COS AI,
-            No.6/13, Ground Floor,
-            Kamaraj Nagar 4th Street,
-            Tallakulam, Madurai-625002
-            Phone: 0452-3500776</p> -->
-        <!-- <div style="padding: 2%;"></div> -->
+      
         <p class ="office-mail"><i class= aria-hidden="true"></i>+91-98765 432101</p>
         <p class ="office-mail"><i class= aria-hidden="true"></i>bookify@gmail.com</p>
         <h2>Follow us</h2>
@@ -333,12 +309,22 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             const images = document.querySelectorAll('.service-img');
+            const description = document.querySelectorAll('.service-description')
+
+            console.log(description)
             data.forEach((book, index) => {
-                console.log(data)
+                if (index < description.length ) {
+
+                     
+
+                    description[index].textContent = book.truncated_description;
+                    
+
+                }
                 if(index < images.length) {
-                    // Prepend the static path to the image path from the database
+                    
                     images[index].src = '/static/' + book.image_path;
-                    // Update other elements if necessary
+                   
                 }
             });
         })
