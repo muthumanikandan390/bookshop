@@ -137,7 +137,9 @@
                     <div class="service-box1 service-img-container">
                         <img class="service-img" src="" alt="Book Image">
                     </div>
+                    <p class = "book-name">book name  -<span class = book-span>hello</span> </p>
                     <p class="service-description"></p>
+                    
                     <a href="#" id ="read-more" class="service-link ">Read more</a>
                     <button class="add-to-cart">
                         <div class="default">Add to cart</div>
@@ -160,6 +162,7 @@
                     <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
+                    <p class = "book-name">book name  -<span class = book-span></span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more" class="service-link">Read more</a>
                     <button class="add-to-cart">
@@ -183,6 +186,7 @@
                     <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
+                    <p class = "book-name">book name  -<span class = book-span>hello</span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
                     <button class="add-to-cart">
@@ -205,6 +209,7 @@
                     <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
+                    <p class = "book-name">book name  -<span class = book-span>hello</span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more" class="service-link">Read more</a>
                     <button class="add-to-cart">
@@ -227,6 +232,7 @@
                     <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
+                    <p class = "book-name">book name  -<span class = book-span>hello</span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
                     <button class="add-to-cart">
@@ -249,6 +255,7 @@
                     <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
+                    <p class = "book-name">bookname  -<span class = book-span>hello</span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
                     <button class="add-to-cart">
@@ -381,7 +388,8 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             const images = document.querySelectorAll('.service-img');
-            const description = document.querySelectorAll('.service-description')
+            const description = document.querySelectorAll('.service-description');
+            const bookname = document.querySelectorAll('.book-span')
 
             console.log(description)
             data.forEach((book, index) => {
@@ -398,6 +406,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     images[index].src = '/static/' + book.image_path;
                    
                 }
+
+                if(index < bookname.length) {
+                    bookname[index].textContent = book.name;
+                }
+
             });
         })
         .catch(error => console.error('Error:', error));

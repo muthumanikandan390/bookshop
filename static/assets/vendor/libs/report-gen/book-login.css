@@ -792,7 +792,7 @@
           
       }
       .quick-services .service-box {
-        min-height: 550px !important; /* Adjust this value as per your need */
+        min-height: 635px !important; /* Adjust this value as per your need */
     }
    
     .service-box1 :hover{
@@ -803,8 +803,8 @@
   }
     
       .service-img-container {
-          width: 70px;
-          height: 70px;
+          width: 80px;
+          height: 123px;
           overflow: hidden;  
           margin: 20px 0;
       }
@@ -814,8 +814,19 @@
           height: auto;
       }
   
+      .book-name {
+        font-family: "Rubik", sans-serif ;
+        margin-top: 12px ;
+        font-weight: 400;
+        font-size: 17px;
+      }
+
+      .book-span {
+        padding-left: 7px;
+      }
+
       .service-description {
-          margin-top: 50px ;
+          margin-top: 7px ;
           color: #8e9398;
           font-family: "Rubik", sans-serif ;
           line-height: 40px;
