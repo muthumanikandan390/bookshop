@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookify</title>
@@ -137,138 +138,78 @@
                     <div class="service-box1 service-img-container">
                         <img class="service-img" src="" alt="Book Image">
                     </div>
-                    <p class = "book-name">book name  -<span class = book-span>hello</span> </p>
+                    <p class = "book-name">book name  -<span class = book-span></span> </p>
                     <p class="service-description"></p>
                     
                     <a href="#" id ="read-more" class="service-link ">Read more</a>
-                    <button class="add-to-cart">
-                        <div class="default">Add to cart</div>
-                        <div class="success">Added</div>
-                        <div class="cart">
-                            <div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="dots"></div>
-                    </button>
+                    <button class="add-to-cart">Add to Cart</button>
                 </div>
                 
             </div>
             
             <!-- Grid 2 -->
             <div class="col-md-4">
-                <div class="service-box">
+                <div class="service-box grid-box">
                     <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
                     <p class = "book-name">book name  -<span class = book-span></span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more" class="service-link">Read more</a>
-                    <button class="add-to-cart">
-                        <div class="default">Add to cart</div>
-                        <div class="success">Added</div>
-                        <div class="cart">
-                            <div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="dots"></div>
-                    </button>
+                    <button class="add-to-cart">Add to Cart</button>
                 </div>
             </div>
             
             
             <!-- Grid 3 -->
             <div class="col-md-4">
-                <div class="service-box">
+                <div class="service-box grid-box">
                     <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
                     <p class = "book-name">book name  -<span class = book-span>hello</span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
-                    <button class="add-to-cart">
-                        <div class="default">Add to cart</div>
-                        <div class="success">Added</div>
-                        <div class="cart">
-                            <div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="dots"></div>
-                    </button>
+                    <button class="add-to-cart">Add to Cart</button>
                 </div>
             </div>
 
             <!-- Grid 4 -->
             <div class="col-md-4">
-                <div class="service-box">
+                <div class="service-box grid-box">
                     <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
                     <p class = "book-name">book name  -<span class = book-span>hello</span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more" class="service-link">Read more</a>
-                    <button class="add-to-cart">
-                        <div class="default">Add to cart</div>
-                        <div class="success">Added</div>
-                        <div class="cart">
-                            <div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="dots"></div>
-                    </button>
+                    <button class="add-to-cart">Add to Cart</button>
                 </div>
             </div>
 
             <!-- Grid 5 -->
             <div class="col-md-4">
-                <div class="service-box">
+                <div class="service-box grid-box">
                     <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
                     <p class = "book-name">book name  -<span class = book-span>hello</span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
-                    <button class="add-to-cart">
-                        <div class="default">Add to cart</div>
-                        <div class="success">Added</div>
-                        <div class="cart">
-                            <div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="dots"></div>
-                    </button>
+                    <button class="add-to-cart">Add to Cart</button>
                 </div>
             </div>
 
             <!-- Grid 6 -->
             <div class="col-md-4 scale">
-                <div class="service-box">
+                <div class="service-box grid-box">
                     <div class="service-box1 service-img-container">
                         <img class="service-img" src="" >
                     </div>
                     <p class = "book-name">bookname  -<span class = book-span>hello</span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
-                    <button class="add-to-cart">
-                        <div class="default">Add to cart</div>
-                        <div class="success">Added</div>
-                        <div class="cart">
-                            <div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="dots"></div>
-                    </button>
+                    <button class="add-to-cart">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -383,39 +324,71 @@ profile.onclick = function () {
     menu.classList.toggle('active');
 }
 
+// document.addEventListener('DOMContentLoaded', function() {
+//     fetch('http://localhost:8000/api/books/')
+//         .then(response => response.json())
+//         .then(data => {
+//             const images = document.querySelectorAll('.service-img');
+//             const description = document.querySelectorAll('.service-description');
+//             const bookname = document.querySelectorAll('.book-span')
+
+//             console.log(description)
+//             data.forEach((book, index) => {
+//                 if (index < description.length ) {
+
+                     
+
+//                     description[index].textContent = book.truncated_description;
+                    
+
+//                 }
+//                 if(index < images.length) {
+                    
+//                     images[index].src = '/static/' + book.image_path;
+                   
+//                 }
+
+//                 if(index < bookname.length) {
+//                     bookname[index].textContent = book.name;
+//                 }
+
+//             });
+//         })
+//         .catch(error => console.error('Error:', error));
+// });
+
 document.addEventListener('DOMContentLoaded', function() {
     fetch('http://localhost:8000/api/books/')
         .then(response => response.json())
         .then(data => {
-            const images = document.querySelectorAll('.service-img');
-            const description = document.querySelectorAll('.service-description');
-            const bookname = document.querySelectorAll('.book-span')
+            const gridBoxes = document.querySelectorAll('.service-box.grid-box');
+            
 
-            console.log(description)
             data.forEach((book, index) => {
-                if (index < description.length ) {
+                if (index < gridBoxes.length) {
+                    const gridBox = gridBoxes[index];
 
-                     
-
-                    description[index].textContent = book.truncated_description;
+                    const image = gridBox.querySelector('.service-img');
+                    image.src = '/static/' + book.image_path;
                     
 
-                }
-                if(index < images.length) {
-                    
-                    images[index].src = '/static/' + book.image_path;
+                    const bookNameSpan = gridBox.querySelector('.book-span');
+                    bookNameSpan.textContent = book.name;
+
+                    const description = gridBox.querySelector('.service-description');
+                    description.textContent = book.truncated_description;
+
+                    const addToCartButton = gridBox.querySelector('.add-to-cart');
+                    addToCartButton.dataset.bookId = book.id;
                    
+                    if (index === 4) {
+                        console.log('Book ID of the 4th grid:', addToCartButton.dataset.bookId);
+                    }
                 }
-
-                if(index < bookname.length) {
-                    bookname[index].textContent = book.name;
-                }
-
             });
         })
         .catch(error => console.error('Error:', error));
 });
-
 
 
         </script>
