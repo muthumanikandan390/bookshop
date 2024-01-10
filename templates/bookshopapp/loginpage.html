@@ -324,45 +324,55 @@ profile.onclick = function () {
     menu.classList.toggle('active');
 }
 
+
+
 // document.addEventListener('DOMContentLoaded', function() {
 //     fetch('http://localhost:8000/api/books/')
 //         .then(response => response.json())
 //         .then(data => {
-//             const images = document.querySelectorAll('.service-img');
-//             const description = document.querySelectorAll('.service-description');
-//             const bookname = document.querySelectorAll('.book-span')
+//             const gridBoxes = document.querySelectorAll('.service-box.grid-box');
+            
 
-//             console.log(description)
 //             data.forEach((book, index) => {
-//                 if (index < description.length ) {
+//                 if (index < gridBoxes.length) {
+//                     const gridBox = gridBoxes[index];
 
-                     
-
-//                     description[index].textContent = book.truncated_description;
+//                     const image = gridBox.querySelector('.service-img');
+//                     image.src = '/static/' + book.image_path;
                     
 
-//                 }
-//                 if(index < images.length) {
-                    
-//                     images[index].src = '/static/' + book.image_path;
+//                     const bookNameSpan = gridBox.querySelector('.book-span');
+//                     bookNameSpan.textContent = book.name;
+
+//                     const description = gridBox.querySelector('.service-description');
+//                     description.textContent = book.truncated_description;
+
+//                     const addToCartButton = gridBox.querySelector('.add-to-cart');
+//                     addToCartButton.dataset.bookId = book.id;
                    
+//                     if (index === 4) {
+//                         console.log('Book ID of the 4th grid:', addToCartButton.dataset.bookId);
+//                     }
 //                 }
-
-//                 if(index < bookname.length) {
-//                     bookname[index].textContent = book.name;
-//                 }
-
 //             });
 //         })
 //         .catch(error => console.error('Error:', error));
 // });
+// console.log(JSON.stringify({ book_id: bookId }));
+// fetch ('/add_to_cart/',{
+//     method:'POST',
+//     headers: {
+//         'content-Type': 'application/json',
+//             },
+//     body: JSON.stringify({book_id : BookId})
+// })
+
 
 document.addEventListener('DOMContentLoaded', function() {
     fetch('http://localhost:8000/api/books/')
         .then(response => response.json())
         .then(data => {
             const gridBoxes = document.querySelectorAll('.service-box.grid-box');
-            
 
             data.forEach((book, index) => {
                 if (index < gridBoxes.length) {
@@ -370,7 +380,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     const image = gridBox.querySelector('.service-img');
                     image.src = '/static/' + book.image_path;
-                    
 
                     const bookNameSpan = gridBox.querySelector('.book-span');
                     bookNameSpan.textContent = book.name;
@@ -380,10 +389,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     const addToCartButton = gridBox.querySelector('.add-to-cart');
                     addToCartButton.dataset.bookId = book.id;
-                   
-                    if (index === 4) {
-                        console.log('Book ID of the 4th grid:', addToCartButton.dataset.bookId);
-                    }
+
+                    addToCartButton.addEventListener('click', function() {
+                        let bookId = this.dataset.bookId;
+                        console.log(JSON.stringify({ book_id: bookId }));
+
+                        fetch('/add_to_cart/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                // Include CSRF token if needed
+                            },
+                            body: JSON.stringify({ book_id: bookId })
+                        })
+                     
+                    });
                 }
             });
         })
