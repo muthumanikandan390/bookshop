@@ -64,72 +64,54 @@ user_id = request.session.get('user_id')
 use this to use the id in our different function
 
 """
+
+
+
 @require_POST
 @csrf_exempt 
 
-# def add_to_cart(request):
-#     user_id = request.session.get('user_id')
-#     if not user_id:
-#         return JsonResponse({'error': 'Authentication required'}, status=401)
-#     try:
-#         user = UserProfile.objects.get(id = user_id)
-#     except UserProfile.DoesNotExist:
-#         return JsonResponse({'error': 'User not found'}, status=404)
-    
-#     try:
-#         book_id = request.POST.get(book_id)
-#     except:
-#         pass
-
-# def add_to_cart(request):
-#     print("Add to cart request received")
-#     user_id = request.session.get('user_id')
-#     if not user_id:
-#         return JsonResponse({'error': 'Authentication required'}, status=401)
-
-#     try:
-#         user = Userprofile.objects.get(id=user_id)
-#     except Userprofile.DoesNotExist:
-#         return JsonResponse({'error': 'User not found'}, status=404)
-
-#     # Decode JSON from the request body
-    
-#     data = json.loads(request.body)
-#     book_id = data.get('book_id')
-#     print("##############Received book_id:", book_id)  # Print the book_id to the terminal
-  
 def add_to_cart(request):
-    user_id = request.session.get('user_id')
-    if not user_id:
-        return JsonResponse({'error': 'Authentication required'}, status=401)
-
-    try:
-        user = Userprofile.objects.get(id=user_id)
-    except Userprofile.DoesNotExist:
-        return JsonResponse({'error': 'User not found'}, status=404)
-
-    # Decode JSON from the request body
     try:
         data = json.loads(request.body)
         book_id = data.get('book_id')
-        print(f"############{book_id}")
-        return JsonResponse({'message': 'Book added to cart'}, status=201)
-    except json.JSONDecodeError:
-        return JsonResponse({'error': 'Invalid JSON'}, status=400)
-
-    # if not book_id:
-    #     return JsonResponse({'error': 'Book ID is required'}, status=400)
-
-    # try:
-    #     book = Book.objects.get(id=book_id)
        
-    # except Book.DoesNotExist:
-    #     return JsonResponse({'error': 'Book not found'}, status=404)
+        user_id = request.session.get('user_id')
+        print(f"################### book id:{user_id}")
+        if not user_id:
+            return JsonResponse({"error": "User not logged in"}, status=403)
+        try:
+            user_profile = Userprofile.objects.get(id = user_id)
+        except Userprofile.DoesNotExist:
+            return JsonResponse({"error":"data not available"}, status = 404)
 
-    # cart, created = Cart.objects.get_or_create(user=user)
-    # CartItem.objects.create(cart=cart, book=book)
+        #checking users cart
 
-    # return JsonResponse({'message': 'Book added to cart'}, status=201)
+        try:
+            cart = Cart.objects.get(user = user_profile)
+        except Cart.DoesNotExist:
+            cart = Cart.objects.create(user = user_profile)
+
+        try:
+            book = Book.objects.get(book_id = book_id)
+        except Book.DoesNotExist:
+            return JsonResponse({"error": "Book not found"}, status=404)
+
+        #checking book excistence
+
+        cart_item_exists = CartItem.objects.filter(cart=cart, book=book).exists()
+
+        if not cart_item_exists:
+            CartItem.objects.create(cart=cart, book=book, quantity=1)
+        
+        cart_item_count = cart.items.count()
+        print(f"$$$$$$$$$$$ item count = {cart_item_count}")
+
+        return JsonResponse({"message": "Book added to cart", "cartItemCount": cart_items_count})
+
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
@@ -181,44 +163,6 @@ class CartItemViewSet(viewsets.ModelViewSet):
 
 
 
-
-
-
-
-
-
-
-
-# class CartItemViewSet(viewsets.ViewSet):
-#     def create(self, request):
-#         user_id = request.session.get('user_id')
-#         if not user_id:
-#             return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
-
-#         try:
-#             user = Userprofile.objects.get(id=user_id)
-#         except Userprofile.DoesNotExist:
-#             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
-
-#         cart, created = Cart.objects.get_or_create(user=user)
-
-#         book_id = request.data.get('book_id')
-#         if not book_id:
-#             return Response({'error': 'Book ID is required'}, status=status.HTTP_400_BAD_REQUEST)
-
-#         try:
-#             book = Book.objects.get(id=book_id)
-#         except Book.DoesNotExist:
-#             return Response({'error': 'Book not found'}, status=status.HTTP_404_NOT_FOUND)
-
-#         request.data['cart'] = cart.id
-#         request.data['book'] = book.id
-
-#         serializer = CartItemSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response({'message': 'Book added to cart'}, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 

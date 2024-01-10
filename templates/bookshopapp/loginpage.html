@@ -326,48 +326,6 @@ profile.onclick = function () {
 
 
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     fetch('http://localhost:8000/api/books/')
-//         .then(response => response.json())
-//         .then(data => {
-//             const gridBoxes = document.querySelectorAll('.service-box.grid-box');
-            
-
-//             data.forEach((book, index) => {
-//                 if (index < gridBoxes.length) {
-//                     const gridBox = gridBoxes[index];
-
-//                     const image = gridBox.querySelector('.service-img');
-//                     image.src = '/static/' + book.image_path;
-                    
-
-//                     const bookNameSpan = gridBox.querySelector('.book-span');
-//                     bookNameSpan.textContent = book.name;
-
-//                     const description = gridBox.querySelector('.service-description');
-//                     description.textContent = book.truncated_description;
-
-//                     const addToCartButton = gridBox.querySelector('.add-to-cart');
-//                     addToCartButton.dataset.bookId = book.id;
-                   
-//                     if (index === 4) {
-//                         console.log('Book ID of the 4th grid:', addToCartButton.dataset.bookId);
-//                     }
-//                 }
-//             });
-//         })
-//         .catch(error => console.error('Error:', error));
-// });
-// console.log(JSON.stringify({ book_id: bookId }));
-// fetch ('/add_to_cart/',{
-//     method:'POST',
-//     headers: {
-//         'content-Type': 'application/json',
-//             },
-//     body: JSON.stringify({book_id : BookId})
-// })
-
-
 document.addEventListener('DOMContentLoaded', function() {
     fetch('http://localhost:8000/api/books/')
         .then(response => response.json())
