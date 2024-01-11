@@ -4,16 +4,18 @@ from . models import Userprofile
 from django.contrib.auth import authenticate, login
 from rest_framework import viewsets,status
 from . models import Book , Cart , CartItem
-from . serializers import BookSerializer,CartItemSerializer
+from . serializers import BookSerializer,CartItemSerializer,CartSerializer
 from rest_framework.response import Response
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.http import JsonResponse
+from django.db import connection
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 
 
 
-# Create your views here.
 def base(request):
     return render(request,'bookshopapp/base.html')
 
@@ -61,7 +63,7 @@ def login_auth(request):
 """
 
 user_id = request.session.get('user_id')
-use this to use the id in our different function
+
 
 """
 
@@ -103,8 +105,14 @@ def add_to_cart(request):
         if not cart_item_exists:
             CartItem.objects.create(cart=cart, book=book, quantity=1)
         
-        cart_item_count = cart.items.count()
+        with connection.cursor() as cursor:
+            cursor.execute(f"SELECT COUNT (*) FROM bookshopapp_cartitem WHERE cart_id = {cart.id}")
+            row = cursor.fetchone()
+        cart_item_count = row[0] if row else 0
         print(f"$$$$$$$$$$$ item count = {cart_item_count}")
+
+        # cart_item_count = cart.items.count()
+        # print(f"$$$$$$$$$$$ item count = {cart_item_count}")
 
         return JsonResponse({"message": "Book added to cart", "cartItemCount": cart_items_count})
 
@@ -120,6 +128,33 @@ class BookViewSet(viewsets.ModelViewSet):
 
 class CartItemViewSet(viewsets.ModelViewSet):
     pass
+
+class CartDetailsView(APIView):
+    def get(self, request, *args, **kwargs):
+        user_id = request.session.get('user_id')
+        if not user_id:
+            return Response({"error": "User not logged in"}, status=403)
+        try:
+            cart = Cart.objects.get(user_id=user_id)
+            serializer = CartSerializer(cart)
+            return Response(serializer.data)
+        except Cart.DoesNotExist:
+            return Response({"error": "Cart not found"}, status=404)
+
+@api_view(['GET'])
+def get_cart_item_count(request):
+    user_id = request.session.get('user_id')
+    if not user_id:
+        return Response({"error": "User not logged in"}, status=403)
+
+    try:
+        user_profile = Userprofile.objects.get(id=user_id)
+        cart = Cart.objects.get(user=user_profile)
+    except (Userprofile.DoesNotExist, Cart.DoesNotExist):
+        return Response({"error": "Cart not found"}, status=404)
+
+    cart_item_count = cart.items.count()
+    return Response({"cartItemCount": cart_item_count})
 
 
 

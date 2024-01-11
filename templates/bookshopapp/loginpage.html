@@ -74,7 +74,7 @@
             
             <li><a class="main-nav-link" href="#">Features</a></li>
             <li><div class="cart">
-                <span class="count">1</span>
+                <span class="count"></span>
                 
                 <i class="material-icons">shopping_cart</i>
               </div></li>
@@ -142,7 +142,17 @@
                     <p class="service-description"></p>
                     
                     <a href="#" id ="read-more" class="service-link ">Read more</a>
-                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="add-to-cart">
+                        <div class="default">Add to cart</div>
+                        <div class="success">Added</div>
+                        <div class="cart">
+                            <div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="dots"></div>
+                    </button>
                 </div>
                 
             </div>
@@ -156,7 +166,17 @@
                     <p class = "book-name">book name  -<span class = book-span></span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more" class="service-link">Read more</a>
-                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="add-to-cart">
+                        <div class="default">Add to cart</div>
+                        <div class="success">Added</div>
+                        <div class="cart">
+                            <div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="dots"></div>
+                    </button>
                 </div>
             </div>
             
@@ -170,7 +190,17 @@
                     <p class = "book-name">book name  -<span class = book-span>hello</span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
-                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="add-to-cart">
+                        <div class="default">Add to cart</div>
+                        <div class="success">Added</div>
+                        <div class="cart">
+                            <div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="dots"></div>
+                    </button>
                 </div>
             </div>
 
@@ -183,7 +213,17 @@
                     <p class = "book-name">book name  -<span class = book-span>hello</span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more" class="service-link">Read more</a>
-                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="add-to-cart">
+                        <div class="default">Add to cart</div>
+                        <div class="success">Added</div>
+                        <div class="cart">
+                            <div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="dots"></div>
+                    </button>
                 </div>
             </div>
 
@@ -196,7 +236,17 @@
                     <p class = "book-name">book name  -<span class = book-span>hello</span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
-                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="add-to-cart">
+                        <div class="default">Add to cart</div>
+                        <div class="success">Added</div>
+                        <div class="cart">
+                            <div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="dots"></div>
+                    </button>
                 </div>
             </div>
 
@@ -209,7 +259,17 @@
                     <p class = "book-name">bookname  -<span class = book-span>hello</span> </p>
                     <p class="service-description"></p>
                     <a href="#" id ="read-more"class="service-link">Read more</a>
-                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="add-to-cart">
+                        <div class="default">Add to cart</div>
+                        <div class="success">Added</div>
+                        <div class="cart">
+                            <div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="dots"></div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -367,6 +427,24 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error:', error));
 });
+
+
+function updateCartItemCount() {
+    fetch('http://127.0.0.1:8000/api/cart_item_count/')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        const count_span = document.querySelector('.count');
+        
+            count_span.textContent = data.cartItemCount;
+            console.log("Cart item count updated to: " + data.cartItemCount);
+        
+    })
+  
+};
+
+updateCartItemCount();
+
 
 
         </script>
