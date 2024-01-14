@@ -34,6 +34,9 @@ def login_valid(request):
 def purchase_page(request):
     return render(request, 'bookshopapp/purchasepage.html')
 
+def loginpage_redirect(request):
+    return redirect('login-page')
+
 
 def signup(request):
     if request.method == 'POST':

@@ -39,9 +39,9 @@
 			  </tbody>
 			  <tfoot>
 				<tr>
-				  <td><a href="#" class="btn btn-info text-white"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+				  <td><a href="{% url 'loginpage-redirect'%}" class="btn btn-info text-white"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
 				  <td colspan="2" class="hidden-xs"></td>
-				  <td class="hidden-xs text-center" style="width:10%;"><strong>Total : 47,000</strong></td>
+				  <td class="hidden-xs text-center" style="width:10%;"><strong id ="total-price" ></strong></td>
 				  <td><a href="#" class="btn btn-success btn-block">Checkout </a></td>
 				</tr>
 			  </tfoot>
@@ -87,6 +87,21 @@ function loadCartItems(){
 	})
 }
 document.addEventListener('DOMContentLoaded', loadCartItems);
+
+function totalprice(){
+	fetch('http://127.0.0.1:8000/purchase/')
+	.then(response => response.json())
+	.then(data => {
+		console.log(data)
+const totalPrice = document.getElementById('total-price')
+
+
+totalPrice.textContent = `total price : ${data.total_price}`
+	})
+}
+
+document.addEventListener('DOMContentLoaded', totalprice);
+
 	  </script>
 </body>
 </html>
