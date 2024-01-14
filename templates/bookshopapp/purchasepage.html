@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'assets/vendor/libs/report-gen/purchase.css' %}"/>
+  {% endblock %}
+  
+
+
+
+<!-- Optional: jQuery, Popper.js, and Bootstrap JS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div class="container main-section">
+		<div class="row">
+		  <div class="col-lg-12 pb-2">
+			<h4>Shoping Cart</h4>
+		  </div>
+		  <div class="col-lg-12 pl-3 pt-3">
+			<table class="table table-hover border bg-white">
+			  <thead>
+				<tr>
+				  <th>Product</th>
+				  <th>Price</th>
+				  <th style="width:10%;"></th>
+				  <th>Subtotal</th>
+				  <th>Action</th>
+				</tr>
+			  </thead>
+			  <tbody id = 'cartItems'> 
+				
+				
+			  </tbody>
+			  <tfoot>
+				<tr>
+				  <td><a href="#" class="btn btn-info text-white"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+				  <td colspan="2" class="hidden-xs"></td>
+				  <td class="hidden-xs text-center" style="width:10%;"><strong>Total : 47,000</strong></td>
+				  <td><a href="#" class="btn btn-success btn-block">Checkout </a></td>
+				</tr>
+			  </tfoot>
+			</table>
+		  </div>
+		</div>
+	  </div>
+
+	  <script>
+function loadCartItems(){
+	fetch('http://127.0.0.1:8000/purchase/')
+	
+	.then(response => response.json())
+	.then(data => {
+		const cartItemsContainer = document.getElementById('cartItems')
+		cartItemsContainer.innerHTML = '';
+		console.log(cartItemsContainer)
+
+		data.items.forEach(item => {
+			const row = document.createElement('tr');
+			row.innerHTML = ` <td>
+                    <div class="row">
+                        <div class="col-lg-2 Product-img">
+                            <img src="/static/${item.book.image_path}" alt="${item.book.name}" class="img-responsive"/>
+                        </div>
+                        <div class="col-lg-10">
+                            <h4 class="nomargin">${item.book.name}</h4>
+                            <p>${item.book.description}</p>
+                        </div>
+                    </div>
+                </td>
+                <td>${item.book.price}</td>
+                <td></td>
+                <td>${parseFloat(item.book.price) * item.quantity}</td>
+                <td class="actions">
+                    <button class="btn btn-warning btn-sm"><i class="fa fa-refresh"></i></button>
+                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                </td>`;
+				cartItemsContainer.appendChild(row)
+
+		})
+
+	})
+}
+document.addEventListener('DOMContentLoaded', loadCartItems);
+	  </script>
+</body>
+</html>

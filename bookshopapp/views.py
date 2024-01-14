@@ -31,6 +31,9 @@ def registerpage(request):
 def login_valid(request):
     return render(request, 'bookshopapp/login_valid.html')
 
+def purchase_page(request):
+    return render(request, 'bookshopapp/purchasepage.html')
+
 
 def signup(request):
     if request.method == 'POST':
@@ -155,6 +158,21 @@ def get_cart_item_count(request):
 
     cart_item_count = cart.items.count()
     return Response({"cartItemCount": cart_item_count})
+
+
+class PurchasePageAPI(APIView):
+    def get(self, request, *args, **kwargs):
+        user_id = request.session.get('user_id')
+        if not user_id:
+            return Response ('failed user', status = 409)
+        try:
+            cart = Cart.objects.get(user_id = user_id)
+            serializer = CartSerializer(cart)
+            return Response(serializer.data)
+        except Cart.DoesNotExist:
+            return Response({'error': 'Cart not found'}, status=404)
+
+
 
 
 

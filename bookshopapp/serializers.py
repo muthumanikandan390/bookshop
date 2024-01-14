@@ -14,12 +14,14 @@ class BookSerializer(serializers.ModelSerializer):
         return obj.description
 
 class CartItemSerializer(serializers.ModelSerializer):
+    book = BookSerializer()
     class Meta:
         model = CartItem
-        fields = ['id','cart_id','book_id','quantity']
+        fields = ['id','cart_id','book_id','quantity','book']
 
 class CartSerializer(serializers.ModelSerializer):
+    items = CartItemSerializer(many=True, read_only=True)
     class Meta:
         model = Cart
-        fields = ['id','created_at','user_id']
+        fields = ['id','created_at','user_id','items']
         

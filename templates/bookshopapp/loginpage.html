@@ -73,11 +73,11 @@
             <li><a class="main-nav-link" href="#">About</a></li>
             
             <li><a class="main-nav-link" href="#">Features</a></li>
-            <li><div class="cart">
+            <li><a href="{% url 'purchase-page'%}"><div class="cart">
                 <span class="count"></span>
                 
                 <i class="material-icons">shopping_cart</i>
-              </div></li>
+              </div></a></li>
             <li>
                 <div class="profile">
                 <a class="main-nav-link-nav-cta" href="#">
@@ -144,14 +144,7 @@
                     <a href="#" id ="read-more" class="service-link ">Read more</a>
                     <button class="add-to-cart">
                         <div class="default">Add to cart</div>
-                        <div class="success">Added</div>
-                        <div class="cart">
-                            <div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="dots"></div>
+                       
                     </button>
                 </div>
                 
@@ -168,14 +161,7 @@
                     <a href="#" id ="read-more" class="service-link">Read more</a>
                     <button class="add-to-cart">
                         <div class="default">Add to cart</div>
-                        <div class="success">Added</div>
-                        <div class="cart">
-                            <div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="dots"></div>
+                    
                     </button>
                 </div>
             </div>
@@ -192,14 +178,7 @@
                     <a href="#" id ="read-more"class="service-link">Read more</a>
                     <button class="add-to-cart">
                         <div class="default">Add to cart</div>
-                        <div class="success">Added</div>
-                        <div class="cart">
-                            <div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="dots"></div>
+                     
                     </button>
                 </div>
             </div>
@@ -215,14 +194,7 @@
                     <a href="#" id ="read-more" class="service-link">Read more</a>
                     <button class="add-to-cart">
                         <div class="default">Add to cart</div>
-                        <div class="success">Added</div>
-                        <div class="cart">
-                            <div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="dots"></div>
+                    
                     </button>
                 </div>
             </div>
@@ -238,14 +210,7 @@
                     <a href="#" id ="read-more"class="service-link">Read more</a>
                     <button class="add-to-cart">
                         <div class="default">Add to cart</div>
-                        <div class="success">Added</div>
-                        <div class="cart">
-                            <div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="dots"></div>
+                   
                     </button>
                 </div>
             </div>
@@ -261,14 +226,7 @@
                     <a href="#" id ="read-more"class="service-link">Read more</a>
                     <button class="add-to-cart">
                         <div class="default">Add to cart</div>
-                        <div class="success">Added</div>
-                        <div class="cart">
-                            <div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="dots"></div>
+                  
                     </button>
                 </div>
             </div>
@@ -361,15 +319,47 @@ For our registered Bookify users, the excitement goes further with exclusive 50%
     </div>
       
 
-
         <script>
-             document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', e => {
-        button.classList.toggle('added');
-    });
-});
-  
-        var navbar = document.querySelector('.header');
+            // Event listener for Add to Cart buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', e => {
+                    
+                    let bookId = button.dataset.bookId;
+                    console.log(JSON.stringify({ book_id: bookId }));
+        
+                    // Send request to add the item to the cart
+                    fetch('/add_to_cart/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            // Include CSRF token if needed
+                        },
+                        body: JSON.stringify({ book_id: bookId })
+                    }).then(() => {
+                        // After adding to cart, fetch the updated count
+                        updateCartItemCount();
+                    });
+                });
+            });
+        
+            // Function to update the cart item count
+            function updateCartItemCount() {
+                fetch('http://127.0.0.1:8000/api/cart_item_count/')
+                .then(response => response.json())
+                .then(data => {
+                    const count_span = document.querySelector('.count');
+                    count_span.textContent = data.cartItemCount;
+                    console.log("Cart item count updated to: " + data.cartItemCount);
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        
+            // Initial call to set the cart item count on page load
+            updateCartItemCount();
+        
+            // Other existing scripts
+        
+            var navbar = document.querySelector('.header');
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 100) {
                     navbar.classList.add('scrolled');
@@ -377,76 +367,42 @@ For our registered Bookify users, the excitement goes further with exclusive 50%
                     navbar.classList.remove('scrolled');
                 }
             });
+        
             let profile = document.querySelector('.profile');
-let menu = document.querySelector('.menu');
-
-profile.onclick = function () {
-    menu.classList.toggle('active');
-}
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('http://localhost:8000/api/books/')
-        .then(response => response.json())
-        .then(data => {
-            const gridBoxes = document.querySelectorAll('.service-box.grid-box');
-
-            data.forEach((book, index) => {
-                if (index < gridBoxes.length) {
-                    const gridBox = gridBoxes[index];
-
-                    const image = gridBox.querySelector('.service-img');
-                    image.src = '/static/' + book.image_path;
-
-                    const bookNameSpan = gridBox.querySelector('.book-span');
-                    bookNameSpan.textContent = book.name;
-
-                    const description = gridBox.querySelector('.service-description');
-                    description.textContent = book.truncated_description;
-
-                    const addToCartButton = gridBox.querySelector('.add-to-cart');
-                    addToCartButton.dataset.bookId = book.id;
-
-                    addToCartButton.addEventListener('click', function() {
-                        let bookId = this.dataset.bookId;
-                        console.log(JSON.stringify({ book_id: bookId }));
-
-                        fetch('/add_to_cart/', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                // Include CSRF token if needed
-                            },
-                            body: JSON.stringify({ book_id: bookId })
-                        })
-                     
+            let menu = document.querySelector('.menu');
+        
+            profile.onclick = function () {
+                menu.classList.toggle('active');
+            }
+        
+            // Fetch and display books
+            document.addEventListener('DOMContentLoaded', function() {
+                fetch('http://localhost:8000/api/books/')
+                .then(response => response.json())
+                .then(data => {
+                    const gridBoxes = document.querySelectorAll('.service-box.grid-box');
+        
+                    data.forEach((book, index) => {
+                        if (index < gridBoxes.length) {
+                            const gridBox = gridBoxes[index];
+        
+                            const image = gridBox.querySelector('.service-img');
+                            image.src = '/static/' + book.image_path;
+        
+                            const bookNameSpan = gridBox.querySelector('.book-span');
+                            bookNameSpan.textContent = book.name;
+        
+                            const description = gridBox.querySelector('.service-description');
+                            description.textContent = book.truncated_description;
+        
+                            const addToCartButton = gridBox.querySelector('.add-to-cart');
+                            addToCartButton.dataset.bookId = book.id;
+                        }
                     });
-                }
+                })
+                .catch(error => console.error('Error:', error));
             });
-        })
-        .catch(error => console.error('Error:', error));
-});
-
-
-function updateCartItemCount() {
-    fetch('http://127.0.0.1:8000/api/cart_item_count/')
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
-        const count_span = document.querySelector('.count');
-        
-            count_span.textContent = data.cartItemCount;
-            console.log("Cart item count updated to: " + data.cartItemCount);
-        
-    })
-  
-};
-
-updateCartItemCount();
-
-
-
         </script>
+        
 </body>
 </html>

@@ -40,3 +40,12 @@ class CartItem(models.Model):
         return f"{self.book.name} x {self.quantity}"
 
 
+class PurchasedItem(models.Model):
+    user = models.ForeignKey(Userprofile,on_delete = models.CASCADE)
+    book = models.ForeignKey(Book,on_delete = models.CASCADE,null=True)
+    purchase_date = models.DateTimeField(auto_now_add = True)
+
+    
+    
+
+
