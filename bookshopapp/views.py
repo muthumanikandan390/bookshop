@@ -3,7 +3,7 @@ from . forms import SignUpForm , LoginForm
 from . models import Userprofile
 from django.contrib.auth import authenticate, login
 from rest_framework import viewsets,status
-from . models import Book , Cart , CartItem
+from . models import Book , Cart , CartItem , PurchasedItem
 from . serializers import BookSerializer,CartItemSerializer,CartSerializer
 from rest_framework.response import Response
 from django.views.decorators.http import require_POST
@@ -13,6 +13,7 @@ from django.http import JsonResponse
 from django.db import connection
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
+from django.db import transaction
 
 
 
@@ -35,7 +36,7 @@ def purchase_page(request):
     return render(request, 'bookshopapp/purchasepage.html')
 
 def loginpage_redirect(request):
-    return redirect('login-page')
+    return render(request, 'bookshopapp/loginpage.html')
 
 
 def signup(request):
@@ -175,6 +176,56 @@ class PurchasePageAPI(APIView):
         except Cart.DoesNotExist:
             return Response({'error': 'Cart not found'}, status=404)
 
+
+class purchased_item_api(APIView):
+    def get(self,request,*args,**kwargs):
+        user_id = request.session.get('user_id')
+        if not user_id:
+            return Response({'user not found'},status = 419)
+        
+        try:
+            user = Userprofile.objects.get(id = user_id)
+            cart = Cart.objects.get(user = user)
+
+            cart_items = cart.items.all()
+
+            if len(cart_items) == 0:
+                return Response({'error': 'Cart is empty'}, status=400)
+            
+            with transaction.atomic():
+                for item in cart_items:
+                    PurchasedItem.objects.create(
+                        user=user,
+                        book=item.book,
+                       
+                    )
+                cart_items.delete()
+                return Response({'message':'Checkout successful'}, status = 303)
+        except Userprofile.DoesNotExist:
+            return Response({'error': 'User not found'}, status=404)
+        except Cart.DoesNotExist:
+            return Response({'error': 'Cart not found'}, status=404)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            
+
+                   
+             
+                   
+                   
+            
+
+
+            
+
+
+            
+
+
+
+
+
+    
 
 
 

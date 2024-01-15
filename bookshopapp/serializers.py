@@ -36,4 +36,9 @@ class CartSerializer(serializers.ModelSerializer):
             book_price = item.book.price
             total = total + book_price 
         return total
+
+class purchasedItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = '__all__'
+
         

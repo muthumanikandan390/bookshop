@@ -42,7 +42,7 @@
 				  <td><a href="{% url 'loginpage-redirect'%}" class="btn btn-info text-white"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
 				  <td colspan="2" class="hidden-xs"></td>
 				  <td class="hidden-xs text-center" style="width:10%;"><strong id ="total-price" ></strong></td>
-				  <td><a href="#" class="btn btn-success btn-block">Checkout </a></td>
+				  <td><a href="#" id="checkoutButton" class="btn btn-success btn-block">Checkout </a></td>
 				</tr>
 			  </tfoot>
 			</table>
@@ -101,6 +101,30 @@ totalPrice.textContent = `total price : ${data.total_price}`
 }
 
 document.addEventListener('DOMContentLoaded', totalprice);
+
+document.getElementById('checkoutButton').addEventListener('click',function(event){
+	fetch("{% url 'checkout' %}",{
+		method : 'GET',
+	})
+	.then(response => {
+		if(response.ok){
+			return response.json();
+		} 
+		else {
+			throw new Error('Something went wrong');
+		}
+	})
+
+	.then(data => {
+            alert('Checkout successful!');
+            // Update UI or redirect as needed
+        })
+
+		.catch(error => {
+            console.error('Checkout error:', error);
+            
+        });
+})
 
 	  </script>
 </body>
