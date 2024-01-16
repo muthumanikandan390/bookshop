@@ -340,6 +340,7 @@ For our registered Bookify users, the excitement goes further with exclusive 50%
       
 
         <script>
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             // Event listener for Add to Cart buttons
             document.querySelectorAll('.add-to-cart').forEach(button => {
                 button.addEventListener('click', e => {
@@ -397,9 +398,14 @@ For our registered Bookify users, the excitement goes further with exclusive 50%
         
             // Fetch and display books
             document.addEventListener('DOMContentLoaded', function() {
-                fetch('http://localhost:8000/bookpopulate/',{
+                fetch('http://127.0.0.1:8000/bookpopulate/',{
                     method: 'GET',
-                    credentials: 'include'
+                    credentials: 'include',
+                    headers: {
+                            'Content-Type': 'application/json',
+                            // Include CSRF token if needed
+                            
+                        },
                 })
                 
                 .then(response => response.json())

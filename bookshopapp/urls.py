@@ -2,7 +2,7 @@ from django.urls import path,include
 from rest_framework.routers import DefaultRouter
 
 from bookshopapp import views
-from bookshopapp.views import BookViewSet,CartDetailsView,get_cart_item_count,PurchasePageAPI,purchased_item_api,BookPopulateView
+from bookshopapp.views import BookViewSet,CartDetailsView,get_cart_item_count,PurchasePageAPI,purchased_item_api,BookPopulateView,BookUpdateView
 
 router = DefaultRouter()
 router.register(r'books', BookViewSet, basename='book')
@@ -25,6 +25,7 @@ urlpatterns = [
     path('purchase/', PurchasePageAPI.as_view(), name='purchase-page-api'),
     path('checkout/', purchased_item_api.as_view(), name='checkout'),
     path('bookpopulate/', BookPopulateView.as_view(), name='bookpopulate'),
+    path('bookupdate/', BookUpdateView.as_view(), name='bookupdate'),
     
     
 ]

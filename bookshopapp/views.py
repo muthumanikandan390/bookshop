@@ -135,8 +135,11 @@ class BookViewSet(viewsets.ModelViewSet):
 
 class BookPopulateView(APIView):
     def get(self, request, *args, **kwargs):
+        user_id = request.session.get('user_id')
+        print(f"user id ***********:{user_id}")
+        if not user_id:
+            return Response({'user not found'},status = 419)
         try:
-            
             books = Book.objects.all()
             serializer = BookNameSerializer(books, many=True)
             return Response(serializer.data)
@@ -284,6 +287,15 @@ class purchased_item_api(APIView):
 
 
 
+class BookUpdateView(APIView):
+    def get(self, request, *args, **kwargs):
+        try:
+            
+            books = Book.objects.all()
+            serializer = BookNameSerializer(books, many=True)
+            return Response(serializer.data)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 
