@@ -56,6 +56,20 @@
   background-attachment: fixed;
   justify-content: center; 
 }
+
+
+.purchased-badge{
+    width: 300px;
+   font-size: 18px;
+   
+   
+}
+
+.badge-div{
+    margin-top: -24px;
+    margin-bottom: 18px;
+    /* display: none; */
+}
     </style>
 </head>
 <body>
@@ -134,7 +148,12 @@
             
             <!-- Grid 1 -->
             <div class="col-md-4">
+                
                 <div class="service-box grid-box">
+                    <div class ="badge-div"> 
+                        <span  class="badge badge-danger purchased-badge">Purchased already</span>
+                    </div>
+                    
                     <div class="service-box1 service-img-container">
                         <img class="service-img" src="" alt="Book Image">
                     </div>
@@ -146,6 +165,7 @@
                         <div class="default">Add to cart</div>
                        
                     </button>
+                    
                 </div>
                 
             </div>
@@ -378,6 +398,7 @@ For our registered Bookify users, the excitement goes further with exclusive 50%
             // Fetch and display books
             document.addEventListener('DOMContentLoaded', function() {
                 fetch('http://localhost:8000/api/books/')
+                
                 .then(response => response.json())
                 .then(data => {
                     const gridBoxes = document.querySelectorAll('.service-box.grid-box');

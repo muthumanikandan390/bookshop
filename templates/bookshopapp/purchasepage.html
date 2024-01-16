@@ -12,7 +12,7 @@
 
 
 
-<!-- Optional: jQuery, Popper.js, and Bootstrap JS -->
+
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -46,6 +46,22 @@
 				</tr>
 			  </tfoot>
 			</table>
+<!-- start success pop -->
+
+<!-- <div id="checkoutAlert" class="alert alert-warning alert-dismissible fade show" role="alert" >
+	
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	  <span aria-hidden="true">&times;</span>
+	</button>
+  </div> -->
+  <div id="checkoutAlert" class="alert alert-success" role="alert" style="display: none;">
+	<strong>Checkout successful!</strong> Keep shopping.
+  </div>
+
+<!-- end success pop -->
+
+
+
 		  </div>
 		</div>
 	  </div>
@@ -92,7 +108,7 @@ function totalprice(){
 	fetch('http://127.0.0.1:8000/purchase/')
 	.then(response => response.json())
 	.then(data => {
-		console.log(data)
+		
 const totalPrice = document.getElementById('total-price')
 
 
@@ -111,19 +127,21 @@ document.getElementById('checkoutButton').addEventListener('click',function(even
 			return response.json();
 		} 
 		else {
-			throw new Error('Something went wrong');
+			throw new Error('Something went wrong, status code: ' + response.status);
 		}
 	})
 
 	.then(data => {
-            alert('Checkout successful!');
-            // Update UI or redirect as needed
+            // alert('Checkout successful!');
+			document.getElementById('checkoutAlert').style.display = 'block';
+			console.log("success")
+           
         })
-
 		.catch(error => {
-            console.error('Checkout error:', error);
-            
-        });
+        console.error('Error:', error); 
+    });
+
+		
 })
 
 	  </script>

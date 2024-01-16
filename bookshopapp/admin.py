@@ -1,6 +1,7 @@
 from django.contrib import admin
-from . models import Userprofile , Book, Cart, CartItem
+from . models import Userprofile , Book, Cart, CartItem , PurchasedItem
 # Register your models here.
+
 @admin.register(Userprofile)
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('username' , 'email' , 'phone_number')
@@ -25,6 +26,10 @@ class CartItemAdmin(admin.ModelAdmin):
     list_display = ('cart', 'book', 'quantity')
     search_fields = ('cart__user__username', 'book__name')
     list_filter = ('book',)
+
+admin.site.register(PurchasedItem)
+
+                
 
 #PASSWORD
 # MMK

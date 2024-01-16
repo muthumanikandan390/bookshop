@@ -132,6 +132,20 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
+class BookPopulateView(APIView):
+    def get(self, request, *args, **kwargs):
+        user_id = request.session.get('user_id')
+        if not user_id:
+            return Response({"error": "User not logged in"}, status=403)
+        try:
+            user = Userprofile.objects.get(id = user_id)
+            books = Book.objects.all()
+            serializer = BookNameSerializer(books, many=True)
+            return Response(serializer.data)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 
 class CartItemViewSet(viewsets.ModelViewSet):
     pass
@@ -200,7 +214,7 @@ class purchased_item_api(APIView):
                        
                     )
                 cart_items.delete()
-                return Response({'message':'Checkout successful'}, status = 303)
+                return Response({'message':'Checkout successful'}, status=200)
         except Userprofile.DoesNotExist:
             return Response({'error': 'User not found'}, status=404)
         except Cart.DoesNotExist:
