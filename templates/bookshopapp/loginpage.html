@@ -87,7 +87,7 @@
             <li><a class="main-nav-link" href="#">Home</a></li>
             <li><a class="main-nav-link" href="#">About</a></li>
             
-            <li><a class="main-nav-link" href="#">Features</a></li>
+            <li><a class="main-nav-link scrolly" href="#">Features</a></li>
             <li><a href="{% url 'purchase-page'%}"><div class="cart">
                 <span class="count"></span>
                 
@@ -123,7 +123,7 @@
     <div class="button-container style="position: relative;">
         <div class="row">
 
-            <button class="fortnite">FEATURED BOOKS<span class = fspan></span></button>
+            <a href="#" class="fortnite-scrolly"> <button class="fortnite">FEATURED BOOKS<span class = fspan></span></button></a>
            
           </div>
         
@@ -151,9 +151,9 @@
             <div class="col-md-4">
                 
                 <div class="service-box grid-box">
-                    <div class ="badge-div"> 
+                    <!-- <div class ="badge-div"> 
                         <span  class="badge badge-danger purchased-badge">Purchased already</span>
-                    </div>
+                    </div> -->
                     
                     <div class="service-box1 service-img-container">
                         <img class="service-img" src="" alt="Book Image">
@@ -439,6 +439,41 @@ For our registered Bookify users, the excitement goes further with exclusive 50%
                 })
                 .catch(error => console.error('Error:', error));
             });
+
+
+
+// smooth scrolls 
+
+document.addEventListener('DOMContentLoaded', function() {
+    function smoothScrollTo(selector) {
+        var targetElement = document.querySelector(selector);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    var featureLink = document.querySelector('a.main-nav-link.scrolly');
+    if (featureLink) {
+        featureLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            smoothScrollTo('.quick-services.container-2');
+        });
+    }
+
+    var fortniteScroll = document.querySelector('.fortnite-scrolly');
+    if (fortniteScroll) {
+        fortniteScroll.addEventListener('click', function(e) {
+            e.preventDefault();
+            smoothScrollTo('.quick-services.container-2');
+        });
+    }
+});
+
+
+
+
+
+
         </script>
         
 </body>
