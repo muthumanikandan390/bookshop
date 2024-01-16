@@ -140,6 +140,7 @@ class BookPopulateView(APIView):
         if not user_id:
             return Response({'user not found'},status = 419)
         try:
+            #user_profile = Userprofile.objects.get(id=user_id)
             books = Book.objects.all()
             serializer = BookNameSerializer(books, many=True)
             return Response(serializer.data)
@@ -289,9 +290,21 @@ class purchased_item_api(APIView):
 
 class BookUpdateView(APIView):
     def get(self, request, *args, **kwargs):
+        user_id = request.session.get('user_id')
+        print(f"user id ***********:{user_id}")
+        if not user_id:
+            return Response({'user not found'},status = 419)
         try:
+            user_profile = Userprofile.objects.get(id=user_id)
             
-            books = Book.objects.all()
+
+            purchased_book_id = PurchasedItem.objects.filter(
+                user = user_profile
+                ).values_list('book', flat=True)
+            print(f"the purchases are : { purchased_book_id }")
+
+            books = Book.objects.exclude(id__in = purchased_book_id)
+
             serializer = BookNameSerializer(books, many=True)
             return Response(serializer.data)
         except Exception as e:
