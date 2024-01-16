@@ -397,7 +397,10 @@ For our registered Bookify users, the excitement goes further with exclusive 50%
         
             // Fetch and display books
             document.addEventListener('DOMContentLoaded', function() {
-                fetch('http://localhost:8000/api/books/')
+                fetch('http://localhost:8000/bookpopulate/',{
+                    method: 'GET',
+                    credentials: 'include'
+                })
                 
                 .then(response => response.json())
                 .then(data => {

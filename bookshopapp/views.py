@@ -4,7 +4,7 @@ from . models import Userprofile
 from django.contrib.auth import authenticate, login
 from rest_framework import viewsets,status
 from . models import Book , Cart , CartItem , PurchasedItem
-from . serializers import BookSerializer,CartItemSerializer,CartSerializer
+from . serializers import BookSerializer,CartItemSerializer,CartSerializer,BookNameSerializer
 from rest_framework.response import Response
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
@@ -132,13 +132,11 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
+
 class BookPopulateView(APIView):
     def get(self, request, *args, **kwargs):
-        user_id = request.session.get('user_id')
-        if not user_id:
-            return Response({"error": "User not logged in"}, status=403)
         try:
-            user = Userprofile.objects.get(id = user_id)
+            
             books = Book.objects.all()
             serializer = BookNameSerializer(books, many=True)
             return Response(serializer.data)
