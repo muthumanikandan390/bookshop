@@ -55,11 +55,6 @@ class purchasedItemSerializer(serializers.ModelSerializer):
     class Meta:
         fields = '__all__'
 
-        
-
-
-
-
 
 class BookUpdateSerializer(serializers.ModelSerializer):
     truncated_description = serializers.SerializerMethodField()

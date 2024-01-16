@@ -93,7 +93,7 @@ def add_to_cart(request):
         except Userprofile.DoesNotExist:
             return JsonResponse({"error":"data not available"}, status = 404)
 
-        #checking users cart
+        #cart
 
         try:
             cart = Cart.objects.get(user = user_profile)
@@ -105,7 +105,7 @@ def add_to_cart(request):
         except Book.DoesNotExist:
             return JsonResponse({"error": "Book not found"}, status=404)
 
-        #checking book excistence
+        #book 
 
         cart_item_exists = CartItem.objects.filter(cart=cart, book=book).exists()
 
@@ -224,69 +224,6 @@ class purchased_item_api(APIView):
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             
-
-                   
-             
-                   
-                   
-            
-
-
-            
-
-
-            
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 class BookUpdateView(APIView):
     def get(self, request, *args, **kwargs):

@@ -69,6 +69,7 @@
     margin-top: -24px;
     margin-bottom: 18px;
     /* display: none; */
+    
 }
     </style>
 </head>
@@ -341,29 +342,29 @@ For our registered Bookify users, the excitement goes further with exclusive 50%
 
         <script>
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            // Event listener for Add to Cart buttons
+            
             document.querySelectorAll('.add-to-cart').forEach(button => {
                 button.addEventListener('click', e => {
                     
                     let bookId = button.dataset.bookId;
                     console.log(JSON.stringify({ book_id: bookId }));
         
-                    // Send request to add the item to the cart
+                    // add the item to cart
                     fetch('/add_to_cart/', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            // Include CSRF token if needed
+                            
                         },
                         body: JSON.stringify({ book_id: bookId })
                     }).then(() => {
-                        // After adding to cart, fetch the updated count
+                       
                         updateCartItemCount();
                     });
                 });
             });
         
-            // Function to update the cart item count
+            //  cart item count
             function updateCartItemCount() {
                 fetch('http://127.0.0.1:8000/api/cart_item_count/')
                 .then(response => response.json())
@@ -375,10 +376,10 @@ For our registered Bookify users, the excitement goes further with exclusive 50%
                 .catch(error => console.error('Error:', error));
             }
         
-            // Initial call to set the cart item count on page load
+          
             updateCartItemCount();
         
-            // Other existing scripts
+          
         
             var navbar = document.querySelector('.header');
             window.addEventListener('scroll', function() {
@@ -403,7 +404,7 @@ For our registered Bookify users, the excitement goes further with exclusive 50%
                     credentials: 'include',
                     headers: {
                             'Content-Type': 'application/json',
-                            // Include CSRF token if needed
+                            
                             
                         },
                 })
@@ -411,10 +412,16 @@ For our registered Bookify users, the excitement goes further with exclusive 50%
                 .then(response => response.json())
                 .then(data => {
                     const gridBoxes = document.querySelectorAll('.service-box.grid-box');
+
+
+                    gridBoxes.forEach(grid => {
+                    grid.style.display = 'none';
+                                            });
         
                     data.forEach((book, index) => {
                         if (index < gridBoxes.length) {
                             const gridBox = gridBoxes[index];
+                            gridBox.style.display = '';
         
                             const image = gridBox.querySelector('.service-img');
                             image.src = '/static/' + book.image_path;
