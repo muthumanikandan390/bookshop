@@ -103,7 +103,7 @@ function loadCartItems(){
 				const deleteButton = row.querySelector('.btn-danger');
 				deleteButton.addEventListener('click', function(event) {
     const bookId = event.currentTarget.dataset.bookId;
-    deleteBook(bookId, this); // Pass 'this' along with bookId
+    deleteBook(bookId, this);
 });
 
 		})
