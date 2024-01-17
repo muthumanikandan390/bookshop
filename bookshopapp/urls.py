@@ -2,7 +2,7 @@ from django.urls import path,include
 from rest_framework.routers import DefaultRouter
 
 from bookshopapp import views
-from bookshopapp.views import BookViewSet,CartDetailsView,get_cart_item_count,PurchasePageAPI,purchased_item_api,BookPopulateView,BookUpdateView
+from bookshopapp.views import BookViewSet,CartDetailsView,get_cart_item_count,PurchasePageAPI,purchased_item_api,BookPopulateView,BookUpdateView,DeleterApi
 
 router = DefaultRouter()
 router.register(r'books', BookViewSet, basename='book')
@@ -18,6 +18,11 @@ urlpatterns = [
     path('login_auth/',views.login_auth,name = 'login-auth'),
     path('add_to_cart/', views.add_to_cart, name='add_to_cart'),
     path('purchase_page/',views.purchase_page,name = 'purchase-page'),
+
+
+    # path('deleted/',views.deleter,name = 'delete'),
+
+
     path('loginpage_redirect/',views.loginpage_redirect,name = 'loginpage-redirect'),
     path('api/',include(router.urls)),
     path('api/cart/', CartDetailsView.as_view(), name='cart-details'),
@@ -26,6 +31,7 @@ urlpatterns = [
     path('checkout/', purchased_item_api.as_view(), name='checkout'),
     path('bookpopulate/', BookPopulateView.as_view(), name='bookpopulate'),
     path('bookupdate/', BookUpdateView.as_view(), name='bookupdate'),
+    path('deleter/', DeleterApi.as_view(), name='dele'),
     
     
 ]

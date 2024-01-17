@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="{{ csrf_token }}">
   <title>Document</title>
   {% block stylesheet %}
   <link rel="stylesheet" href="{% static 'assets/vendor/libs/report-gen/purchase.css' %}"/>
@@ -67,6 +68,7 @@
 	  </div>
 
 	  <script>
+		const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 function loadCartItems(){
 	fetch('http://127.0.0.1:8000/purchase/')
 	
@@ -94,9 +96,15 @@ function loadCartItems(){
                 <td>${parseFloat(item.book.price) * item.quantity}</td>
                 <td class="actions">
                     <button class="btn btn-warning btn-sm"><i class="fa fa-refresh"></i></button>
-                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                    <button class="btn btn-danger btn-sm" data-book-id = ${item.book.id} ><i class="fa fa-trash-o"></i></button>
                 </td>`;
 				cartItemsContainer.appendChild(row)
+
+				const deleteButton = row.querySelector('.btn-danger');
+				deleteButton.addEventListener('click', function(event) {
+    const bookId = event.currentTarget.dataset.bookId;
+    deleteBook(bookId, this); // Pass 'this' along with bookId
+});
 
 		})
 
@@ -144,6 +152,30 @@ document.getElementById('checkoutButton').addEventListener('click',function(even
 		
 })
 
+function deleteBook (bookId,buttonElement) {
+	fetch ('http://127.0.0.1:8000/deleter/',{
+		method : 'POST',
+		headers: {
+                    'Content-Type': 'application/json',
+					'X-CSRFToken': csrfToken,
+
+                },
+		body : JSON.stringify({ book_id : bookId})
+
+	})
+	.then (response => response.json())
+	.then (data => {
+		if (data.message === "Book deleted successfully") {
+			const cartItemRow = buttonElement.closest('tr');
+            cartItemRow.remove();
+		} else {
+			console.error('Error:', data.error);
+		}
+	})
+	.catch(error => {
+        console.error('Error:', error);
+    });
+}
 	  </script>
 </body>
 </html>

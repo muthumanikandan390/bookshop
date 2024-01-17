@@ -12,7 +12,8 @@ import json
 from django.http import JsonResponse
 from django.db import connection
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
+from rest_framework.permissions import IsAuthenticated
 from django.db import transaction
 
 
@@ -247,5 +248,54 @@ class BookUpdateView(APIView):
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+# @api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+# def deleter(request):
+#     try:
+#         data = json.loads(request.body)
+#         book_id = data.get('book_id')
 
+#         print(f"deeeleeeteee book id :{book_id}")
+#         return Response({"message": "Book deleted successfully"}, status=status.HTTP_200_OK)
+
+#     except Exception as e:
+#         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class DeleterApi(APIView):
+    def post(self, request, *args, **kwargs):
+        try:
+            user_id = request.session.get('user_id')
+            if not user_id:
+                return Response({'user not found'},status = 404)
+            print(user_id)
+            user_profile = Userprofile.objects.get(id=user_id)
+            book_id = request.data.get('book_id')
+            print(f"deeeleeeteee book id :{book_id}")
+            # Add your logic to delete the book here
+
+            try:
+                cart = Cart.objects.get(user_id=user_id)
+            except Cart.DoesNotExist:
+                return Response({'error': 'Cart not found'}, status=status.HTTP_404_NOT_FOUND)
+            
+
+            try:
+                cart_item = CartItem.objects.get(cart=cart, book_id=book_id)
+                cart_item.delete()  # Delete the cart item
+            except CartItem.DoesNotExist:
+                return Response({'error': 'Cart item not found'}, status=status.HTTP_404_NOT_FOUND)
+
+
+           
+
+            return Response({"message": "Book deleted successfully"}, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+        
+        
+        
 
