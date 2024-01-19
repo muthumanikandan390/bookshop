@@ -15,6 +15,9 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.db import transaction
+from django.contrib.auth import authenticate, login ,logout
+from django.contrib.auth.backends import BaseBackend
+from django.contrib.auth.hashers import check_password
 
 
 
@@ -22,6 +25,9 @@ def base(request):
     return render(request,'bookshopapp/base.html')
 
 def loginpage(request):
+    if 'user_id' not in request.session:
+        return redirect('login-valid')
+    
     return render(request,'bookshopapp/loginpage.html')
 
 def test(request):
@@ -52,19 +58,34 @@ def signup(request):
     return render(request,'bookshopapp/registerpage.html',{'form':form})
 
 
+
+
+def logout_view(request):
+    logout(request)  
+    return redirect('login-valid')
+
+
+@csrf_exempt
 def login_auth(request):
+    if 'user_id' in request.session:
+        return redirect('login-page')
+    
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        try:
-            user = Userprofile.objects.get(username=username, password=password)
-            request.session['user_id'] = user.id  
-            # print(f"############:{user.id}")
-            request.session['mailid'] = user.email
-            return render(request, 'bookshopapp/loginpage.html', {'username': username})  
-        except Userprofile.DoesNotExist:
+        user = authenticate(request, username=username, password=password)
+        print(f"Authenticated user: {user}")
+        if user is not None:
+            login(request, user)
+            request.session['user_id'] = user.id
+            return redirect('login-page')  
+        else:
             return render(request, 'bookshopapp/base.html', {'error': 'Invalid username or password'})
+
+    
     return render(request, 'bookshopapp/login_valid.html')
+
 
 
 
@@ -272,7 +293,7 @@ class DeleterApi(APIView):
             user_profile = Userprofile.objects.get(id=user_id)
             book_id = request.data.get('book_id')
             print(f"deeeleeeteee book id :{book_id}")
-            # Add your logic to delete the book here
+            
 
             try:
                 cart = Cart.objects.get(user_id=user_id)
@@ -282,7 +303,7 @@ class DeleterApi(APIView):
 
             try:
                 cart_item = CartItem.objects.get(cart=cart, book_id=book_id)
-                cart_item.delete()  # Delete the cart item
+                cart_item.delete()  # Delete cart item
             except CartItem.DoesNotExist:
                 return Response({'error': 'Cart item not found'}, status=status.HTTP_404_NOT_FOUND)
 
